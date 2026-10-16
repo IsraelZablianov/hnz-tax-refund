@@ -1,0 +1,24 @@
+{
+  "name": "hnz-tax-refund",
+  "version": "0.1.0",
+  "description": "Hebrew RTL lead-generation site for Hila Noah Zablianov, CPA — החזרי מס לשכירים",
+  "type": "module",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  }
+}
