@@ -50,18 +50,17 @@ function buildCredentials() {
 
   // The licence number renders only once we actually have it: structured data
   // must match visible content, so a placeholder is worse than an omission.
+  // When it arrives, it carries the register link with it — a bare link to the
+  // register without a number to look up is noise, which is why there is no
+  // `else` branch here.
   if (LICENCE_NUMBER) {
     items.push(
-      `רישיון רואת חשבון מס' <bdi>${LICENCE_NUMBER}</bdi> — ` +
-        `<a href="${LICENCE_REGISTER_URL}" rel="noopener">ניתן לאמת בפנקס רואי החשבון ←</a>`,
-    );
-  } else {
-    items.push(
-      `<a href="${LICENCE_REGISTER_URL}" rel="noopener">פנקס רואי החשבון של משרד המשפטים ←</a>`,
+      `רישיון רואת חשבון מס' <bdi>${LICENCE_NUMBER}</bdi>. ` +
+        `<a href="${LICENCE_REGISTER_URL}" rel="noopener">ניתן לאמת בפנקס רואי החשבון</a>`,
     );
   }
 
-  items.push(`${DEGREE_HE} — ${INSTITUTION_HE}`, 'שפות: עברית, אנגלית');
+  items.push(`${DEGREE_HE}, ${INSTITUTION_HE}`);
   return items.map((i) => `<li>${i}</li>`).join('');
 }
 

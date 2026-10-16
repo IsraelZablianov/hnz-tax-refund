@@ -184,10 +184,16 @@
 }
 
 .ledger__table caption {
-  text-align: start;
-  font-size: var(--fs-small);
-  color: var(--text-muted);
-  padding-bottom: 0.85rem;
+  /* Screen-reader only. The visible intro paragraph above the table already
+     gives sighted users this context, so rendering it twice is redundant — and
+     once the table is blockified on mobile, a display:table-caption child of a
+     display:block parent gets orphaned into a one-word-per-line column. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .ledger__head th {

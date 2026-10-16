@@ -1,0 +1,33 @@
+<!--
+  HNZ mark.
+
+  Three letters are illegible at 16px, so the mark is the H alone, drawn as
+  geometric bars with the crossbar deliberately overshooting both stems and set
+  heavier than them. The overshoot is the whole idea: it reads as a ruled line
+  through a letterform, which is the same ledger-rule language the years table
+  on the homepage uses, and it stops the glyph reading as default browser text.
+
+  Charcoal field rather than the warm cream one: maximum contrast against both
+  light and dark browser chrome. The olive accent is deliberately absent — at
+  #2f4036 against #30332f it is invisible, so it carries the OG image instead.
+
+  Colours are the tokens from src/styles/tokens.css: --dark, --text-on-dark.
+
+  Drawn as <rect>s, never <text>: fonts are not resolved inside an SVG favicon,
+  so a text node would silently fall back to whatever the browser has.
+
+  Every coordinate is a whole number on the 32-unit grid, including the 3-unit
+  crossbar, so the 32px raster in scripts/render-images.mjs lands on exact pixel
+  boundaries instead of being antialiased into mush. Stems straddle 16 (10–13,
+  19–22) and the crossbar straddles it too (14–17); the mark is symmetric on
+  both axes. The overshoot is 2 units each side — less than the stem width, so
+  it reads as an H with a rule through it rather than as a hash.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="HNZ">
+  <rect x="0" y="0" width="32" height="32" rx="4" fill="#30332f"/>
+  <g fill="#efece4">
+    <rect x="10" y="7" width="3" height="18"/>
+    <rect x="19" y="7" width="3" height="18"/>
+    <rect x="8" y="14" width="16" height="3"/>
+  </g>
+</svg>

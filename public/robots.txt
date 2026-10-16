@@ -1,0 +1,7 @@
+# https://tax.hnz-cpa.com/
+# Everything here is meant to be found. Nothing is gated, there is no admin
+# surface, and the whole site is one static document per URL.
+User-agent: *
+Allow: /
+
+Sitemap: https://tax.hnz-cpa.com/sitemap.xml

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>og-image source — 1200×630</title>
+
+    <!--
+      OG CARD SOURCE — regenerate, do not edit the PNG.
+
+        node scripts/render-images.mjs      (see README)
+
+      It renders this file at exactly 1200×630 and writes public/og-image.png.
+      Kept in public/ so it is regenerable from a checkout with nothing but a
+      browser, the same way the sibling `hnz` card repo does it.
+
+      ── Why there is no tax year on this card ────────────────────────────────
+      It is a static PNG. The homepage's year data is injected at build time and
+      corrected client-side; a PNG can do neither. Baking "2020 נסגרת ב-2026"
+      into it would make the card a false statement about someone's legal rights
+      from 1 January onward, and nobody would notice, because link previews are
+      cached by the platforms.
+
+      So the card states the SIX-YEAR RULE, which is evergreen, and cites
+      §160 for it. The only year present is 2018 — the year she was licensed,
+      a fixed historical fact permitted under תקנה 2(ג)(3).
+
+      vite.config.js enforces this: the build FAILS if this file mentions the
+      current calendar year or the expiring tax year.
+
+      ── Why the copy is what it is ──────────────────────────────────────────
+      No fee, no percentage, no shekel amount, no superlative, no testimonial,
+      no client result, no "חינם". Only: her name, her title, her seniority,
+      her field of practice with the mandatory שירות נלווה label, and a
+      statement of law with its source. See docs/spec/02-constraints.md.
+    -->
+
+    <style>
+      /* The self-hosted Rubik subset, same file the site ships. Relative path
+         so this renders identically from file:// and from the deployed URL. */
+      @font-face {
+        font-family: 'Rubik';
+        font-style: normal;
+        font-weight: 300 500;
+        font-display: block;
+        src: url('fonts/rubik-hebrew-var.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'RubikLatin';
+        font-style: normal;
+        font-weight: 300 500;
+        font-display: block;
+        src: url('fonts/rubik-latin-var.woff2') format('woff2');
+      }
+
+      /* Tokens copied, not imported: this file must render standalone from
+         file:// with no build step. Keep in sync with src/styles/tokens.css. */
+      :root {
+        --bg: #f3efe7;
+        --dark: #30332f;
+        --dark-soft: #3d4139;
+        --accent: #2f4036;
+        --signal: #b7410e;
+        --closed: #9a978d;
+        --text-on-dark: #efece4;
+        --text-on-dark-muted: #a9a79c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--dark);
+        color: var(--text-on-dark);
+        font-family: 'Rubik', 'RubikLatin', system-ui, sans-serif;
+        font-variant-numeric: tabular-nums lining-nums;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      bdi {
+        unicode-bidi: isolate;
+      }
+
+      .card {
+        width: 1200px;
+        height: 630px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        padding: 62px 72px 54px;
+      }
+
+      /* ---------- top row: mark + credential ---------- */
+
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .mark {
+        width: 58px;
+        height: 58px;
+        flex: none;
+      }
+
+      .credential {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1.45;
+        color: var(--text-on-dark-muted);
+        letter-spacing: -0.005em;
+      }
+
+      .credential .ancillary {
+        color: var(--closed);
+        font-size: 20px;
+      }
+
+      /* ---------- the claim ---------- */
+
+      .claim {
+        align-self: center;
+        padding-block: 10px;
+      }
+
+      /* Two lines, deliberately. Weight does the hierarchy, not colour:
+         the premise is light, the operative fact is medium. Sized so the
+         long line very nearly spans the measure — a short line in a 1200px
+         card reads as an accident rather than a decision. */
+      .claim h1 {
+        font-size: 87px;
+        font-weight: 300;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+      }
+
+      .claim h1 em {
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      /* The statutory deadline is an expiry fact, so it carries the signal
+         hairline — the same treatment the homepage counter uses, and the only
+         sanctioned use of --signal. */
+      .basis {
+        margin-top: 36px;
+        padding-inline-start: 18px;
+        border-inline-start: 3px solid var(--signal);
+        font-size: 26px;
+        font-weight: 300;
+        line-height: 1.5;
+        color: var(--text-on-dark);
+      }
+
+      .basis span {
+        color: var(--text-on-dark-muted);
+      }
+
+      /* ---------- footer row ---------- */
+
+      .foot {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+        padding-top: 28px;
+        border-top: 1px solid rgba(239, 236, 228, 0.18);
+      }
+
+      .who {
+        font-size: 31px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+      }
+
+      .who small {
+        font-size: 24px;
+        font-weight: 300;
+        color: var(--text-on-dark-muted);
+        margin-inline-start: 10px;
+      }
+
+      .host {
+        font-size: 23px;
+        font-weight: 300;
+        color: var(--text-on-dark-muted);
+        letter-spacing: 0.01em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="top">
+        <!-- Same mark as public/favicon.svg, inlined so this file has no
+             dependency that could resolve differently under file://. -->
+        <svg class="mark" viewBox="0 0 32 32" aria-label="HNZ" role="img">
+          <rect x="0" y="0" width="32" height="32" rx="4" fill="#3d4139" />
+          <g fill="#efece4">
+            <rect x="10" y="7" width="3" height="18" />
+            <rect x="19" y="7" width="3" height="18" />
+            <rect x="6" y="14" width="20" height="4" />
+          </g>
+        </svg>
+
+        <p class="credential">
+          רואת חשבון מוסמכת משנת <bdi>2018</bdi><br />
+          מתמחה בהחזרי מס לשכירים
+          <span class="ancillary">(שירות נלווה)</span>
+        </p>
+      </div>
+
+      <div class="claim">
+        <h1>
+          מס ששולם ביתר<br />
+          ניתן לתבוע <em>שש שנים אחורה</em>
+        </h1>
+
+        <p class="basis">
+          כל שנת מס נסגרת ב-31 בדצמבר, שש שנים מתומה.<br />
+          <span>סעיף <bdi>160</bdi> לפקודת מס הכנסה.</span>
+        </p>
+      </div>
+
+      <div class="foot">
+        <p class="who">הילה נח זבליאנוב <small>רואת חשבון</small></p>
+        <p class="host"><bdi>tax.hnz-cpa.com</bdi></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "החזרי מס לשכירים — רו״ח הילה נח זבליאנוב",
+  "short_name": "החזרי מס · רו״ח הילה",
+  "description": "רואת חשבון מוסמכת, מתמחה בהחזרי מס לשכירים (שירות נלווה). ניתן לתבוע מס ששולם ביתר עד שש שנים אחורה.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "theme_color": "#30332f",
+  "background_color": "#f3efe7",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/favicon-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ]
+}

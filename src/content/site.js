@@ -63,4 +63,58 @@ export const GOV_LINKS = {
   taxCreditCalculator: 'https://www.gov.il/he/service/tax-credit',
 };
 
-export const SITE_URL = 'https://hnz-cpa.com'; // TODO(open-question-7): confirm subdomain
+/**
+ * Canonical origin. Resolved (was open-question-7): the site ships on the
+ * `tax.` subdomain, which is what `public/CNAME` serves and what GitHub Pages
+ * has an HTTPS certificate for. `card.hnz-cpa.com` is her separate business
+ * card; the apex is still the Wix page.
+ *
+ * One host, no exceptions — canonicals, sitemap, JSON-LD @ids and og:url all
+ * derive from this constant. Mixed hosts create accidental duplicates.
+ */
+export const SITE_URL = 'https://tax.hnz-cpa.com';
+
+/** og:site_name and the web manifest name. */
+export const SITE_NAME_HE = 'החזרי מס לשכירים — רו״ח הילה נח זבליאנוב';
+export const SITE_SHORT_NAME_HE = 'החזרי מס · רו״ח הילה';
+
+/**
+ * The service, and its mandatory classification.
+ *
+ * תקנה 2(ג)(4) requires advertising to distinguish ראיית חשבון from
+ * עיסוקים נלווים. Filing a טופס 135 refund claim is NOT ראיית חשבון — that
+ * term is statutorily reserved, and tax filing is not reserved to CPAs.
+ * So it is labelled שירות נלווה, everywhere, in visible copy and in schema.
+ */
+export const SERVICE_HE = 'החזרי מס לשכירים';
+export const SERVICE_CLASS_HE = 'שירות נלווה';
+
+/**
+ * areaServed for the business node. Deliberately short: five named localities
+ * plus the metro. Over-broad service areas dilute local relevance for no gain
+ * (docs/spec/07-seo.md), and this list must stay recognisable as the same set
+ * the footer shows.
+ */
+export const AREA_SERVED_HE = [...SERVICE_AREAS_HE, 'גוש דן'];
+
+/** Social profiles, as a flat list for schema `sameAs`. */
+export const SAME_AS = Object.values(SOCIAL);
+
+/** Open Graph card. Regenerate with public/og-image.html — see README. */
+export const OG_IMAGE_PATH = '/og-image.png';
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
+
+/** Accessibility statement. Legally required — תקן ת"י 5568. */
+export const ACCESSIBILITY_SLUG = 'נגישות';
+export const ACCESSIBILITY_TITLE_HE = 'הצהרת נגישות';
+
+/**
+ * Date the accessibility statement was last reviewed, ISO-8601.
+ *
+ * This one date IS hardcoded, and that is correct: a statement of accessibility
+ * conformance is a claim about a specific review on a specific day. Deriving it
+ * from the build clock would silently re-date the claim on every deploy and
+ * assert a review that never happened.
+ */
+export const ACCESSIBILITY_REVIEWED = '2026-10-16';
