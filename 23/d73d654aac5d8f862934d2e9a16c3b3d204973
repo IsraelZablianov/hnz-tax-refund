@@ -1,0 +1,32 @@
+index.html
+  h_9761be55243ee8 10,92,104,122,152,157,168,212,220,223,226,256,306
+public/favicon.svg
+  h_9761be55243ee8 1-33
+public/og-image.html
+  h_9761be55243ee8 1-240
+public/robots.txt
+  h_9761be55243ee8 1-7
+public/site.webmanifest
+  h_9761be55243ee8 1-29
+scripts/render-images.mjs
+  h_9761be55243ee8 1-228
+src/content/copy.js
+  h_9761be55243ee8 27,39,70
+src/content/site.js
+  h_9761be55243ee8 66-120
+src/styles/home.css
+  h_9761be55243ee8 187-196
+vite.config.js
+  h_9761be55243ee8 53-55,58-59,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "23d73d654aac5d8f862934d2e9a16c3b3d204973",
+  "prompts": {},
+  "humans": {
+    "h_9761be55243ee8": {
+      "author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
