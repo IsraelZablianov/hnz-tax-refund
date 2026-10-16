@@ -1,0 +1,16 @@
+docs/spec/08-plan.md
+  h_9761be55243ee8 135-148
+src/content/site.js
+  h_9761be55243ee8 19-33,37-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "dbe72b536e15fd2174552e94a5c3210787c911a3",
+  "prompts": {},
+  "humans": {
+    "h_9761be55243ee8": {
+      "author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
