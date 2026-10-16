@@ -1,0 +1,19 @@
+index.html
+  s_c2d089876e7e30::t_faea69ed233f42 55-59,85-93,302-309,327-328,359
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c67ce8d92495f5bc1626daa5a4dea4e459180f5f",
+  "prompts": {},
+  "sessions": {
+    "s_c2d089876e7e30": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "4fad230d-8c99-42f8-8ebb-2c1c6c1753c0",
+        "model": "unknown"
+      },
+      "human_author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
