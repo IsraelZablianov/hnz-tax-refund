@@ -21,7 +21,13 @@
  *     2023). Dead markup that only adds weight.
  *   - The licence number appears ONLY if it is also visible on the page.
  *     Structured data must match rendered content; see buildCredentials().
- *   - `priceRange: "₪₪"` is a category band, not a fee. Permitted.
+ *   - `priceRange` is deliberately NOT emitted. It is arguably a category band
+ *     rather than a fee, and 07-seo.md permitted it — but 02-constraints.md
+ *     puts any fee range on the RED list and declares itself the tie-breaker.
+ *     The deciding factor is cost/benefit, not categorisation: `priceRange`
+ *     renders nothing here (the LocalBusiness rich result is minimal, and we
+ *     deliberately omit `streetAddress`, so it is ineligible anyway). Zero
+ *     upside against non-zero risk to a professional licence. Do not re-add it.
  *
  * `streetAddress` is deliberately absent: she is a service-area business with a
  * hidden address, and schema must match what the Google Business Profile shows.
@@ -147,8 +153,9 @@ function businessNode() {
       addressCountry: 'IL',
     },
     areaServed: AREA_SERVED_HE.map((name) => ({ '@type': 'City', name })),
-    // A category band, not a fee. No percentage, no amount, no range in ₪.
-    priceRange: '₪₪',
+    // priceRange intentionally omitted — see the header note. It would render
+    // nothing (we omit streetAddress, so the rich result is ineligible), and
+    // 02-constraints.md is the tie-breaker on anything fee-shaped.
     currenciesAccepted: 'ILS',
     knowsLanguage: ['he', 'en'],
     sameAs: SAME_AS,

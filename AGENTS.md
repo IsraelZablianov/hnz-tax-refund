@@ -37,8 +37,14 @@ without checking it against this list.
 
 ### Required on every page
 
-- The service must be labelled **`שירות נלווה`**, visually distinguished from
-  `ראיית חשבון`. Mandatory under `2(ג)(4)`.
+- The service must be labelled **`שירות נלווה`** wherever **fields of practice
+  are enumerated** — the footer line and the JSON-LD. Required by `2(ג)(4)`,
+  which permits listing fields of practice only `תוך הבחנה` between
+  `ראיית חשבון` and `עיסוקים נלווים`. Filing a refund is not `ראיית חשבון`
+  (that term covers only work reserved by law to CPAs), so the distinction is
+  mandatory. **Do not add it to the hero or to body copy** — it is
+  regulator-facing jargon a visitor cannot parse, the regulation does not ask
+  for it there, and saying it twice on one page reads as hedging.
 - A named author byline linking to `/אודות`.
 - The footer disclaimer: `אין באמור באתר זה ייעוץ מס אישי...`
 
@@ -54,10 +60,52 @@ to stop reading `02`.
 
 ### What we convert on instead
 
-The deadline as a neutral statement of law; her licence number plus a link to the
-public register; her own process stated factually; that she never initiates
-contact; State Comptroller figures instead of her own; and honest disclosure of
-the ~1.4% debt risk. See `docs/spec/02-constraints.md` for the exact wording.
+The deadline as a neutral statement of law; her name, photograph and seniority
+since 2018; her own process stated factually; State Comptroller figures instead
+of her own; and honest disclosure of the ~1.4% debt risk. See
+`docs/spec/02-constraints.md` for the exact wording.
+
+Note two things the research recommended that are **deliberately not used**: the
+licence number (the owner chose not to publish it — see `src/content/site.js`)
+and the "I will never call you" line (removed at her request). Their absence
+shifts more of the trust load onto imagery and the honesty block.
+
+---
+
+## ✍️ House style for Hebrew copy
+
+### No em dashes or en dashes in user-facing text
+
+**Never** use `—` or `–` in any Hebrew string that reaches a visitor or a
+crawler. That includes body copy, headings, `<title>`, meta descriptions,
+JSON-LD values, OG tags and alt text. It is a recognisable machine-writing tell
+and the owner has explicitly rejected it.
+
+**Rewrite the sentence; do not just swap the dash for a comma.** A comma splice
+reads just as artificial. Restructure instead:
+
+| ❌ | ✅ |
+| --- | --- |
+| `כל שינוי — עבודה חדשה, מילואים — יוצר פער` | `כל שינוי כמו עבודה חדשה או מילואים יוצר פער` |
+| `הגשה — רק אחרי שאישרת` | `הגשה רק אחרי שאישרת` |
+| `רשות המסים — בקשה להחזר מס` | `רשות המסים: בקשה להחזר מס` |
+| `שירות נלווה — החזרי מס` | `החזרי מס (שירות נלווה)` |
+
+Use a colon, a parenthesis, a full stop, or a restructured clause. Hyphens that
+Hebrew actually requires are fine and expected: `ב-31 בדצמבר`, `כ-98%`,
+`דו-כיוונית`. Year ranges take a plain hyphen: `2013-2019`.
+
+Dashes inside **code comments** are fine. They are never rendered, and the CI
+guard strips comments before checking.
+
+**CI enforces this** across every emitted HTML document. A dash in Hebrew copy
+is a failed build, not a review comment.
+
+### Other copy rules
+
+- No decorative arrows (`←`, `→`) appended to link text.
+- `רו״ח` uses the gershayim `U+05F4`, one form site-wide. Never the ASCII `"`.
+- Prefer plain, concrete Hebrew. If a sentence reads like a brochure, rewrite it.
 
 ---
 

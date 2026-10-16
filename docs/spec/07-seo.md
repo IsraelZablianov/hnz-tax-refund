@@ -76,7 +76,11 @@ required for the rich result. **That is the correct trade-off.** Do not fabricat
 an address to pass a test; schema must match what GBP shows.
 
 `areaServed`: חולון, בת ים, ראשון לציון, תל אביב-יפו, גוש דן.
-`priceRange: "₪₪"` is fine. No percentage.
+`priceRange` is **not** emitted. `02-constraints.md` puts anything fee-shaped on
+the RED list and declares itself the tie-breaker, and the cost/benefit settles
+it independently: because we omit `streetAddress` for the service-area business,
+the LocalBusiness rich result is ineligible, so `priceRange` renders nothing at
+all. Zero upside against non-zero risk to a professional licence. No percentage.
 
 ### The person node
 

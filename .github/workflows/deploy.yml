@@ -123,6 +123,35 @@ jobs:
               || fail "$doc does not label the service as 'שירות נלווה'"
           done
 
+          # House style: no em/en dashes in Hebrew text a visitor or a crawler
+          # sees — body copy, titles, meta descriptions, JSON-LD values, alt
+          # text. It is a recognisable machine-writing tell and the owner has
+          # explicitly rejected it. HTML comments are stripped first, since
+          # dashes there are never rendered. See AGENTS.md § House style.
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const walk = (d) => fs.readdirSync(d, { withFileTypes: true })
+              .flatMap((e) => e.isDirectory()
+                ? walk(path.join(d, e.name))
+                : (e.name.endsWith(".html") ? [path.join(d, e.name)] : []));
+            let bad = 0;
+            for (const f of walk("dist")) {
+              const s = fs.readFileSync(f, "utf8").replace(/<!--[\s\S]*?-->/g, "");
+              for (const m of s.matchAll(/[^\n<>]{0,60}[\u2014\u2013][^\n<>]{0,40}/g)) {
+                const t = m[0].trim();
+                if (!/[\u0590-\u05FF]/.test(t)) continue;
+                console.error(`::error file=${f}::em/en dash in Hebrew copy: ${t}`);
+                bad++;
+              }
+            }
+            if (bad) {
+              console.error("Rewrite the sentence; do not swap the dash for a comma.");
+              console.error("See AGENTS.md for the substitution table.");
+              process.exit(1);
+            }
+          '
+
           echo "✓ build verified"
 
       - uses: actions/configure-pages@v5
