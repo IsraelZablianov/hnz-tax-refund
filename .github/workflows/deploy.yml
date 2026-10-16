@@ -1,0 +1,91 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Rebuild on 1 January so the deployed HTML can never carry a stale tax year.
+  # The runtime script also corrects a stale build client-side, but a crawler
+  # does not run JS — so the static HTML has to be right on its own.
+  schedule:
+    - cron: '5 0 1 1 *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The year math is the site's factual spine: a regression here is a
+      # regression in what we tell people about their legal rights.
+      # Never deploy on failing tests.
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # Guard against the specific failure modes that matter for this site.
+      - name: Verify build output
+        run: |
+          set -e
+          fail() { echo "::error::$1"; exit 1; }
+
+          grep -q 'ledger__row' dist/index.html \
+            || fail "Years ledger missing from static HTML"
+
+          [ "$(grep -c 'trigger__name' dist/index.html)" -ge 9 ] \
+            || fail "Refund triggers missing from static HTML"
+
+          grep -q 'wa.me' dist/index.html \
+            || fail "WhatsApp link missing"
+
+          if grep -qE '\{\{[A-Z_]+\}\}' dist/index.html; then
+            fail "Unsubstituted template token in output"
+          fi
+
+          # Compliance tripwires. These strings are prohibited for a licensed
+          # CPA under תקנות רואי חשבון — see docs/spec/02-constraints.md.
+          # A build that contains them must not reach the public.
+          if grep -q 'חינם' dist/index.html; then
+            fail "Prohibited word 'חינם' found — use 'ללא עלות'"
+          fi
+          if grep -q 'מומחה' dist/index.html; then
+            fail "Prohibited word 'מומחה' found — only 'מתמחה' is permitted"
+          fi
+          if grep -q '7 שנים' dist/index.html; then
+            fail "Factually wrong: the income-tax window is 6 years, not 7"
+          fi
+
+          echo "✓ build verified"
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
