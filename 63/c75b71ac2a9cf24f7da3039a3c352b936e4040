@@ -1,0 +1,20 @@
+.github/workflows/deploy.yml
+  h_9761be55243ee8 126-154
+AGENTS.md
+  h_9761be55243ee8 40-47,63-108
+docs/spec/07-seo.md
+  h_9761be55243ee8 79-83
+src/lib/schema.js
+  h_9761be55243ee8 24-30,156-158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "63c75b71ac2a9cf24f7da3039a3c352b936e4040",
+  "prompts": {},
+  "humans": {
+    "h_9761be55243ee8": {
+      "author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
