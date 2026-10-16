@@ -1,0 +1,63 @@
+.github/workflows/deploy.yml
+  s_4d672830743dfd::t_122e2298dec9f6 45-60,79-106,110-124
+.gitignore
+  s_4d672830743dfd::t_c07e9cf010db50 11-13
+AGENT-WORK-SPLIT.md
+  s_4d672830743dfd::t_b0171c029df65e 1-92
+AGENTS.md
+  s_4d672830743dfd::t_34201c05ddaaaf 45-54,83-95,120-122,127-162,168-170,173,178-197
+README.md
+  s_4d672830743dfd::t_efb3ebe0b4a7ee 53-56,58,66-68,72-88,110-128,146-199,204-208,211,213-216,220-231,236-238,263-264,268-290,294-303,308-310,315-352
+accessibility.html
+  s_4d672830743dfd::t_319a55bd6cf6f7 1-279
+index.html
+  s_4d672830743dfd::t_d3e874480277ef 7-12,17-23,29-33,82,173,175,206,226,245,249-253,288-289,291-292,311,314-321,340,343
+package.json
+  s_4d672830743dfd::t_61192e85db25d5 13-15
+public/og-image.html
+  s_4d672830743dfd::t_cd70c05ac27c60 33-34,36-42,218
+scripts/verify-dist.mjs
+  s_4d672830743dfd::t_c65ea5c28110df 1-584
+src/content/copy.js
+  s_4d672830743dfd::t_365068ba64f2b7 70-71,79-99,102-137
+src/content/routes.js
+  s_4d672830743dfd::t_403b7cd594eb5a 1-76
+src/content/site.js
+  s_4d672830743dfd::t_56ce45dd7f4183 92,122-144
+src/home.js
+  s_4d672830743dfd::t_29a00e9f879f33 16-17,146-161
+src/lib/analytics.js
+  s_4d672830743dfd::t_f524e5e3470948 1-230
+src/lib/consent.js
+  s_4d672830743dfd::t_c547f830507a40 1-61
+src/lib/schema.js
+  s_4d672830743dfd::t_e46445d9708fc2 1-299
+src/lib/sitemap.js
+  s_4d672830743dfd::t_5cfd3cd5298806 1-55
+src/lib/urls.js
+  s_4d672830743dfd::t_0476922ebdf5d9 1-56
+src/lib/urls.test.js
+  s_4d672830743dfd::t_f3eeb7cca1414e 1-162
+src/styles/doc.css
+  s_4d672830743dfd::t_1d06e065f19ca2 1-261
+src/styles/home.css
+  s_4d672830743dfd::t_f820b99fbd8673 711-785
+vite.config.js
+  s_4d672830743dfd::t_8dda594940c5bf 2-5,8-12,15-17,24-33,88-236,240-316,321,323-324,329-357,359-360,362-365,367-369,371-519,522-535,543-550,554-564
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "70cc22b3ccf432a2dcf6733c11b63208cca24c61",
+  "prompts": {},
+  "sessions": {
+    "s_4d672830743dfd": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1cda95d9-abbe-428b-9aff-9b3e4103d436",
+        "model": "unknown"
+      },
+      "human_author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
