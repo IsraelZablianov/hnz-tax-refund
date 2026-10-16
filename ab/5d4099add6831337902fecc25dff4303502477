@@ -1,0 +1,14 @@
+.github/workflows/deploy.yml
+  h_9761be55243ee8 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ab5d4099add6831337902fecc25dff4303502477",
+  "prompts": {},
+  "humans": {
+    "h_9761be55243ee8": {
+      "author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
