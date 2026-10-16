@@ -1,0 +1,320 @@
+.cursor/agents/impeccable-asset-producer.md
+  h_9761be55243ee8 1-45
+.cursor/agents/impeccable-documenter.md
+  h_9761be55243ee8 1-27
+.cursor/agents/impeccable-finish-reviewer.md
+  h_9761be55243ee8 1-42
+.cursor/agents/impeccable-manual-edit-applier.md
+  h_9761be55243ee8 1-95
+.cursor/skills/animate-expo/RECIPES.md
+  h_9761be55243ee8 1-385
+.cursor/skills/animate-expo/SKILL.md
+  h_9761be55243ee8 1-263
+.cursor/skills/animate/RECIPES.md
+  h_9761be55243ee8 1-324
+.cursor/skills/animate/SKILL.md
+  h_9761be55243ee8 1-207
+.cursor/skills/animation-performance/SKILL.md
+  h_9761be55243ee8 1-222
+.cursor/skills/animation-vocabulary/SKILL.md
+  h_9761be55243ee8 1-181
+.cursor/skills/apple-design/SKILL.md
+  h_9761be55243ee8 1-290
+.cursor/skills/ask-sonner/API.md
+  h_9761be55243ee8 1-64
+.cursor/skills/ask-sonner/SKILL.md
+  h_9761be55243ee8 1-88
+.cursor/skills/brandkit/SKILL.md
+  h_9761be55243ee8 1-843
+.cursor/skills/break-ui/CATALOG.md
+  h_9761be55243ee8 1-135
+.cursor/skills/break-ui/SKILL.md
+  h_9761be55243ee8 1-175
+.cursor/skills/design-taste-frontend-v1/SKILL.md
+  h_9761be55243ee8 1-226
+.cursor/skills/design-taste-frontend-v2-experimental/SKILL.md
+  h_9761be55243ee8 1-1228
+.cursor/skills/design-taste-frontend/README.md
+  h_9761be55243ee8 1-81
+.cursor/skills/design-taste-frontend/SKILL.md
+  h_9761be55243ee8 1-414
+.cursor/skills/design-taste-frontend/assets/base.css
+  h_9761be55243ee8 1-100
+.cursor/skills/design-taste-frontend/assets/base.js
+  h_9761be55243ee8 1-37
+.cursor/skills/design-taste-frontend/evals/evals.json
+  h_9761be55243ee8 1-48
+.cursor/skills/design-taste-frontend/library/directions.json
+  h_9761be55243ee8 1-1078
+.cursor/skills/design-taste-frontend/library/heroes.json
+  h_9761be55243ee8 1-894
+.cursor/skills/design-taste-frontend/library/motions.json
+  h_9761be55243ee8 1-57
+.cursor/skills/design-taste-frontend/library/palettes.json
+  h_9761be55243ee8 1-1485
+.cursor/skills/design-taste-frontend/library/photos.json
+  h_9761be55243ee8 1-7240
+.cursor/skills/design-taste-frontend/library/sections.json
+  h_9761be55243ee8 1-4136
+.cursor/skills/design-taste-frontend/library/sites.json
+  h_9761be55243ee8 1-7274
+.cursor/skills/design-taste-frontend/library/type.json
+  h_9761be55243ee8 1-2024
+.cursor/skills/design-taste-frontend/references/colour.md
+  h_9761be55243ee8 1-141
+.cursor/skills/design-taste-frontend/references/copy.md
+  h_9761be55243ee8 1-177
+.cursor/skills/design-taste-frontend/references/critique.md
+  h_9761be55243ee8 1-171
+.cursor/skills/design-taste-frontend/references/imagery.md
+  h_9761be55243ee8 1-377
+.cursor/skills/design-taste-frontend/references/layout.md
+  h_9761be55243ee8 1-178
+.cursor/skills/design-taste-frontend/references/motion.md
+  h_9761be55243ee8 1-292
+.cursor/skills/design-taste-frontend/references/research.md
+  h_9761be55243ee8 1-306
+.cursor/skills/design-taste-frontend/references/tells.md
+  h_9761be55243ee8 1-115
+.cursor/skills/design-taste-frontend/references/type.md
+  h_9761be55243ee8 1-170
+.cursor/skills/design-taste-frontend/scripts/assets.mjs
+  h_9761be55243ee8 1-865
+.cursor/skills/design-taste-frontend/scripts/draw.mjs
+  h_9761be55243ee8 1-525
+.cursor/skills/design-taste-frontend/scripts/inspect.mjs
+  h_9761be55243ee8 1-205
+.cursor/skills/design-taste-frontend/scripts/lib/cdp.mjs
+  h_9761be55243ee8 1-205
+.cursor/skills/design-taste-frontend/scripts/lib/probe.mjs
+  h_9761be55243ee8 1-569
+.cursor/skills/design-taste-frontend/scripts/lib/rules.mjs
+  h_9761be55243ee8 1-137
+.cursor/skills/design-taste-frontend/scripts/lint.mjs
+  h_9761be55243ee8 1-108
+.cursor/skills/emil-design-eng/SKILL.md
+  h_9761be55243ee8 1-674
+.cursor/skills/find-animation-opportunities/SKILL.md
+  h_9761be55243ee8 1-140
+.cursor/skills/full-output-enforcement/SKILL.md
+  h_9761be55243ee8 1-49
+.cursor/skills/gpt-taste/SKILL.md
+  h_9761be55243ee8 1-75
+.cursor/skills/high-end-visual-design/SKILL.md
+  h_9761be55243ee8 1-98
+.cursor/skills/image-to-code/SKILL.md
+  h_9761be55243ee8 1-1228
+.cursor/skills/imagegen-frontend-mobile/SKILL.md
+  h_9761be55243ee8 1-1465
+.cursor/skills/imagegen-frontend-web/SKILL.md
+  h_9761be55243ee8 1-987
+.cursor/skills/impeccable/SKILL.md
+  h_9761be55243ee8 1-86
+.cursor/skills/impeccable/reference/adapt.md
+  h_9761be55243ee8 1-318
+.cursor/skills/impeccable/reference/adapt.native.md
+  h_9761be55243ee8 1-58
+.cursor/skills/impeccable/reference/android.md
+  h_9761be55243ee8 1-46
+.cursor/skills/impeccable/reference/animate.md
+  h_9761be55243ee8 1-89
+.cursor/skills/impeccable/reference/audit.md
+  h_9761be55243ee8 1-139
+.cursor/skills/impeccable/reference/audit.native.md
+  h_9761be55243ee8 1-139
+.cursor/skills/impeccable/reference/bolder.md
+  h_9761be55243ee8 1-33
+.cursor/skills/impeccable/reference/clarify.md
+  h_9761be55243ee8 1-94
+.cursor/skills/impeccable/reference/colorize.md
+  h_9761be55243ee8 1-86
+.cursor/skills/impeccable/reference/component-review.md
+  h_9761be55243ee8 1-63
+.cursor/skills/impeccable/reference/craft-floor.md
+  h_9761be55243ee8 1-44
+.cursor/skills/impeccable/reference/craft.md
+  h_9761be55243ee8 1-5
+.cursor/skills/impeccable/reference/critique.md
+  h_9761be55243ee8 1-819
+.cursor/skills/impeccable/reference/degraded/asset-producer.md
+  h_9761be55243ee8 1-42
+.cursor/skills/impeccable/reference/degraded/documenter.md
+  h_9761be55243ee8 1-24
+.cursor/skills/impeccable/reference/degraded/finish-reviewer.md
+  h_9761be55243ee8 1-38
+.cursor/skills/impeccable/reference/degraded/manual-edit-applier.md
+  h_9761be55243ee8 1-92
+.cursor/skills/impeccable/reference/delight.md
+  h_9761be55243ee8 1-70
+.cursor/skills/impeccable/reference/distill.md
+  h_9761be55243ee8 1-111
+.cursor/skills/impeccable/reference/doctor.md
+  h_9761be55243ee8 1-54
+.cursor/skills/impeccable/reference/document.md
+  h_9761be55243ee8 1-416
+.cursor/skills/impeccable/reference/extract.md
+  h_9761be55243ee8 1-69
+.cursor/skills/impeccable/reference/generate.md
+  h_9761be55243ee8 1-101
+.cursor/skills/impeccable/reference/harden.md
+  h_9761be55243ee8 1-343
+.cursor/skills/impeccable/reference/hooks.md
+  h_9761be55243ee8 1-113
+.cursor/skills/impeccable/reference/init.md
+  h_9761be55243ee8 1-131
+.cursor/skills/impeccable/reference/ios.md
+  h_9761be55243ee8 1-51
+.cursor/skills/impeccable/reference/layout.md
+  h_9761be55243ee8 1-84
+.cursor/skills/impeccable/reference/live-setup.md
+  h_9761be55243ee8 1-104
+.cursor/skills/impeccable/reference/live.md
+  h_9761be55243ee8 1-325
+.cursor/skills/impeccable/reference/mode-operate.md
+  h_9761be55243ee8 1-21
+.cursor/skills/impeccable/reference/mode-persuade.md
+  h_9761be55243ee8 1-19
+.cursor/skills/impeccable/reference/mode-read.md
+  h_9761be55243ee8 1-21
+.cursor/skills/impeccable/reference/new-work.md
+  h_9761be55243ee8 1-152
+.cursor/skills/impeccable/reference/onboard.md
+  h_9761be55243ee8 1-234
+.cursor/skills/impeccable/reference/operate.md
+  h_9761be55243ee8 1-61
+.cursor/skills/impeccable/reference/optimize.md
+  h_9761be55243ee8 1-258
+.cursor/skills/impeccable/reference/overdrive.md
+  h_9761be55243ee8 1-127
+.cursor/skills/impeccable/reference/polish.md
+  h_9761be55243ee8 1-105
+.cursor/skills/impeccable/reference/quieter.md
+  h_9761be55243ee8 1-99
+.cursor/skills/impeccable/reference/region-map.md
+  h_9761be55243ee8 1-26
+.cursor/skills/impeccable/reference/routing.md
+  h_9761be55243ee8 1-24
+.cursor/skills/impeccable/reference/shape.md
+  h_9761be55243ee8 1-59
+.cursor/skills/impeccable/reference/typeset.md
+  h_9761be55243ee8 1-80
+.cursor/skills/impeccable/reference/visualize.md
+  h_9761be55243ee8 1-47
+.cursor/skills/impeccable/scripts/VERSION
+  h_9761be55243ee8 1
+.cursor/skills/impeccable/scripts/command-metadata.json
+  h_9761be55243ee8 1-98
+.cursor/skills/impeccable/scripts/data/font-index-failures.json
+  h_9761be55243ee8 1-121
+.cursor/skills/impeccable/scripts/data/font-index.json
+  h_9761be55243ee8 1
+.cursor/skills/impeccable/scripts/impeccable
+  h_9761be55243ee8 1-206
+.cursor/skills/impeccable/scripts/impeccable.cmd
+  h_9761be55243ee8 1-239
+.cursor/skills/impeccable/scripts/live-browser-dom.js
+  h_9761be55243ee8 1-281
+.cursor/skills/impeccable/scripts/live-browser-ignores.js
+  h_9761be55243ee8 1-242
+.cursor/skills/impeccable/scripts/live-browser-session.js
+  h_9761be55243ee8 1-148
+.cursor/skills/impeccable/scripts/live-browser.js
+  h_9761be55243ee8 1-13536
+.cursor/skills/impeccable/scripts/modern-screenshot.umd.js
+  h_9761be55243ee8 1-14
+.cursor/skills/improve-animations/AUDIT.md
+  h_9761be55243ee8 1-115
+.cursor/skills/improve-animations/PLAN-TEMPLATE.md
+  h_9761be55243ee8 1-73
+.cursor/skills/improve-animations/SKILL.md
+  h_9761be55243ee8 1-109
+.cursor/skills/industrial-brutalist-ui/SKILL.md
+  h_9761be55243ee8 1-92
+.cursor/skills/minimalist-ui/SKILL.md
+  h_9761be55243ee8 1-86
+.cursor/skills/mobile-native/SKILL.md
+  h_9761be55243ee8 1-311
+.cursor/skills/pick-ui-library/SKILL.md
+  h_9761be55243ee8 1-85
+.cursor/skills/prototype/PICKER.md
+  h_9761be55243ee8 1-197
+.cursor/skills/prototype/SKILL.md
+  h_9761be55243ee8 1-98
+.cursor/skills/redesign-existing-projects/SKILL.md
+  h_9761be55243ee8 1-181
+.cursor/skills/review-animations/SKILL.md
+  h_9761be55243ee8 1-120
+.cursor/skills/review-animations/STANDARDS.md
+  h_9761be55243ee8 1-187
+.cursor/skills/stitch-design-taste/DESIGN.md
+  h_9761be55243ee8 1-121
+.cursor/skills/stitch-design-taste/SKILL.md
+  h_9761be55243ee8 1-184
+.cursor/skills/write-swift/SKILL.md
+  h_9761be55243ee8 1-396
+.gitignore
+  h_9761be55243ee8 1-32
+.impeccable/config.json
+  h_9761be55243ee8 1-3
+AGENTS.md
+  h_9761be55243ee8 1-131
+docs/spec/01-intent.md
+  h_9761be55243ee8 1-93
+docs/spec/02-constraints.md
+  h_9761be55243ee8 1-222
+docs/spec/03-architecture.md
+  h_9761be55243ee8 1-208
+docs/spec/04-copy-deck.md
+  h_9761be55243ee8 1-205
+docs/spec/05-funnel.md
+  h_9761be55243ee8 1-198
+docs/spec/06-design.md
+  h_9761be55243ee8 1-253
+docs/spec/07-seo.md
+  h_9761be55243ee8 1-246
+docs/spec/08-plan.md
+  h_9761be55243ee8 1-184
+docs/spec/README.md
+  h_9761be55243ee8 1-63
+index.html
+  h_9761be55243ee8 1-334
+package-lock.json
+  h_9761be55243ee8 1-1205
+package.json
+  h_9761be55243ee8 1-24
+public/CNAME
+  h_9761be55243ee8 1
+src/content/copy.js
+  h_9761be55243ee8 1-81
+src/content/site.js
+  h_9761be55243ee8 1-66
+src/home.js
+  h_9761be55243ee8 1-143
+src/lib/hebrew.js
+  h_9761be55243ee8 1-53
+src/lib/hebrew.test.js
+  h_9761be55243ee8 1-52
+src/lib/refundWindow.js
+  h_9761be55243ee8 1-137
+src/lib/refundWindow.test.js
+  h_9761be55243ee8 1-158
+src/styles/base.css
+  h_9761be55243ee8 1-237
+src/styles/home.css
+  h_9761be55243ee8 1-704
+src/styles/tokens.css
+  h_9761be55243ee8 1-54
+vite.config.js
+  h_9761be55243ee8 1-140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ea256de0f1b4a0618d7773823a670d406e4186ad",
+  "prompts": {},
+  "humans": {
+    "h_9761be55243ee8": {
+      "author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
