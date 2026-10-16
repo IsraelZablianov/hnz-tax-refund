@@ -1,0 +1,19 @@
+README.md
+  s_4d672830743dfd::t_22efe241272cdc 1-174
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "546e4078aa9426e7a639906e4830be21f09e2654",
+  "prompts": {},
+  "sessions": {
+    "s_4d672830743dfd": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1cda95d9-abbe-428b-9aff-9b3e4103d436",
+        "model": "unknown"
+      },
+      "human_author": "Israel Zbalinaov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
