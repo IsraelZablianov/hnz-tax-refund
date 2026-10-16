@@ -1,0 +1,279 @@
+<!doctype html>
+<!--
+  ACCESSIBILITY STATEMENT — /נגישות/
+
+  Legally required for an Israeli commercial website under
+  תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), תשע"ג-2013,
+  which adopts תקן ישראלי ת"י 5568 (WCAG 2.0 level AA).
+  Also named as non-negotiable in docs/spec/02-constraints.md.
+
+  WHY THIS FILE IS CALLED accessibility.html AND NOT נגישות.html
+  --------------------------------------------------------------
+  Source filenames stay ASCII — docs/spec/03-architecture.md, locked. Hebrew
+  filenames are a known failure class on CI runners and in git tooling. The
+  Hebrew slug is applied to the OUTPUT in vite.config.js, which renames this
+  document to נגישות/index.html during generateBundle. Hebrew percent-encoded
+  paths on GitHub Pages were verified by real deploy — Gate 0, docs/spec/08-plan.md.
+
+  COPY RULES APPLY HERE TOO
+  -------------------------
+  No fee, no superlative, no testimonial, no promise. The service is labelled
+  שירות נלווה in the footer, as תקנה 2(ג)(4) requires on every page. Contact
+  details and the review date come from src/content/site.js via build-time
+  tokens — nothing here is hardcoded.
+
+  The "what is not finished" section is deliberately specific. An accessibility
+  statement that lists only successes is not a statement, it is marketing, and
+  under תקנה 35 it is the honest disclosure plus a working contact route that
+  actually discharges the duty.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Title and description are injected from vite.config.js so the rendered
+         page, the Open Graph card and the schema WebPage node all read from one
+         definition and cannot drift apart. -->
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="theme-color" content="#30332f" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+
+    {{HEAD_ASSETS}}
+
+    <link rel="preload" href="/fonts/rubik-hebrew-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/doc.css" />
+
+    {{JSONLD}}
+  </head>
+
+  <body>
+    <a class="visually-hidden" href="#main">דלג לתוכן</a>
+
+    <header class="doc-head">
+      <div class="wrap doc-head__inner">
+        <a class="doc-head__brand" href="/">
+          <strong>הילה נח זבליאנוב</strong>
+          <span>רואת חשבון</span>
+        </a>
+
+        <!-- Mirrors the BreadcrumbList emitted into this page's JSON-LD.
+             › is Bidi_Mirrored, so the browser flips it to ‹ under dir="rtl". -->
+        <nav class="breadcrumb" aria-label="מסלול ניווט">
+          <a href="/">דף הבית</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">הצהרת נגישות</span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap doc__wrap">
+        <h1 class="doc__title">הצהרת נגישות</h1>
+
+        <p class="statement doc__lede">
+          האתר הזה נבנה כדי שיהיה אפשר להשתמש בו גם עם קורא מסך, גם במקלדת
+          בלבד, גם בהגדלת טקסט, וגם כשה-<bdi>JavaScript</bdi> כבוי. ההצהרה הזו
+          מתארת מה נעשה בפועל, מה עדיין לא הושלם, ואל מי לפנות אם משהו לא עובד.
+        </p>
+
+        <p class="doc__meta">
+          עודכנה לאחרונה:
+          <time datetime="{{ACCESSIBILITY_REVIEWED}}"><bdi>{{ACCESSIBILITY_REVIEWED_HE}}</bdi></time>
+        </p>
+
+        <!-- ============ WHAT IS IMPLEMENTED ============ -->
+        <section class="doc__section" aria-labelledby="a11y-done">
+          <h2 id="a11y-done" class="doc__h2">מה מיושם באתר</h2>
+
+          <dl class="doc__list">
+            <dt>מבנה סמנטי אמיתי</dt>
+            <dd>
+              כותרות בהיררכיה רציפה, אזורי דף מסומנים
+              (<bdi>main</bdi>, <bdi>nav</bdi>, <bdi>footer</bdi>), רשימות
+              שהן רשימות, וטבלת שנות המס שהיא טבלה אמיתית עם כותרות שורה
+              ועמודה, ולא תמונה או סידור עמודות מדומה.
+            </dd>
+
+            <dt>ניווט מלא במקלדת</dt>
+            <dd>
+              כל קישור וכל כפתור נגישים ב-<bdi>Tab</bdi> בסדר הגיוני, ואין
+              מלכודות מיקוד. הקישור הראשון בכל עמוד הוא
+              <span class="doc__kbd">דלג לתוכן</span>.
+            </dd>
+
+            <dt>סימון מיקוד גלוי</dt>
+            <dd>
+              לכל רכיב אינטראקטיבי יש מסגרת מיקוד בעובי <bdi>2</bdi> פיקסלים
+              עם מרווח מהאלמנט. סימון המיקוד לא הוסר ולא הוחלף בשום מקום באתר.
+            </dd>
+
+            <dt>כיבוד העדפת צמצום תנועה</dt>
+            <dd>
+              האתר מזהה את הגדרת
+              <bdi>prefers-reduced-motion</bdi> של מערכת ההפעלה ומבטל את כל
+              האנימציות. התוכן נראה במלואו בשני המצבים.
+            </dd>
+
+            <dt>עבודה ללא <bdi>JavaScript</bdi></dt>
+            <dd>
+              כל התוכן המהותי, כולל טבלת השנים והמועדים, מוטמע בקובץ ה-<bdi>HTML</bdi>
+              עצמו בזמן הבנייה. סקריפט שלא נטען לא מסתיר כלום, והמצב ההתחלתי
+              של האתר הוא המצב הגלוי.
+            </dd>
+
+            <dt>כיווניות ושפה</dt>
+            <dd>
+              העמוד מוצהר כעברי ומימין לשמאל (<bdi>lang="he" dir="rtl"</bdi>),
+              כל הפריסה בנויה בתכונות לוגיות, ומספרים, תאריכים וטקסט לטיני
+              מבודדים דו-כיוונית, כדי שמספר טלפון לא ייקרא הפוך ותאריך לא
+              יתהפך באמצע משפט.
+            </dd>
+
+            <dt>טקסט שניתן להגדיל</dt>
+            <dd>
+              גדלי הטקסט יחסיים ולא קבועים. הגדלה ל-<bdi>200%</bdi> אינה חותכת
+              תוכן ואינה דורשת גלילה אופקית. אין חסימת מתיחה במכשירים ניידים.
+            </dd>
+
+            <dt>אזורי לחיצה בגודל סביר</dt>
+            <dd>
+              לכפתורים ולקישורי הפעולה גובה מינימלי של <bdi>56</bdi> פיקסלים,
+              מעל הדרישה המקובלת.
+            </dd>
+
+            <dt>טקסט חלופי לתמונות</dt>
+            <dd>
+              לתמונות התוכן יש תיאור חלופי. אלמנטים דקורטיביים מוסתרים מקוראי
+              מסך במקום לקבל תיאור חסר משמעות.
+            </dd>
+
+            <dt>יעד ניגודיות</dt>
+            <dd>
+              יעד האתר הוא <bdi>AA</bdi> לפי ת"י <bdi>5568</bdi>.
+              יחס של <bdi>4.5:1</bdi> לטקסט רגיל ו-<bdi>3:1</bdi> לטקסט גדול.
+              הטקסט הראשי, הכותרות והכפתורים עומדים ביעד הזה. על החריגים
+              הידועים ראו להלן.
+            </dd>
+          </dl>
+        </section>
+
+        <!-- ============ WHAT IS NOT DONE ============
+             The honest half. Specific, not hedged. -->
+        <section class="doc__section doc__section--gaps" aria-labelledby="a11y-gaps">
+          <h2 id="a11y-gaps" class="doc__h2">מה עדיין לא הושלם</h2>
+
+          <p class="doc__note">
+            אתר שמצהיר רק על מה שעובד אינו הצהרת נגישות. אלה הפערים הידועים
+            לי במועד העדכון שלמעלה.
+          </p>
+
+          <ul class="doc__gaps">
+            <li>
+              <strong>לא נערכה בדיקת נגישות חיצונית.</strong>
+              האתר נבדק בבדיקה עצמית ולא על ידי בודק נגישות מוסמך, ולא הופקה
+              לו חוות דעת נגישות חתומה.
+            </li>
+            <li>
+              <strong>קוראי מסך לא נבדקו בכל השילובים.</strong>
+              לא בוצעה בדיקה שיטתית ב-<bdi>NVDA</bdi>, <bdi>JAWS</bdi>
+              ו-<bdi>VoiceOver</bdi> בכל הדפדפנים.
+            </li>
+            <li>
+              <strong>טקסט משני שאינו מגיע ל-<bdi>4.5:1</bdi>.</strong>
+              בכמה מקומות הערות ותוויות משניות נמדדות בין <bdi>3.6:1</bdi>
+              ל-<bdi>4.4:1</bdi> מול הרקע החם שמאחוריהן, מתחת ליעד שהצבתי.
+              זה פער אמיתי, הוא בתיקון, ואף מידע הכרחי אינו מופיע רק בטקסט
+              הזה.
+            </li>
+            <li>
+              <strong>טבלת השנים משנה מבנה במסכים צרים.</strong>
+              בקוד היא נשארת טבלה אחת עם כותרות; בתצוגה הצרה השורות נערמות.
+              סדר ההקראה במצב הזה לא נבדק בכל קוראי המסך.
+            </li>
+            <li>
+              <strong>קישורים חיצוניים.</strong>
+              האתר מפנה לאתרי רשות המסים, משרד המשפטים ו-<bdi>WhatsApp</bdi>.
+              אין לי שליטה על רמת הנגישות שלהם.
+            </li>
+            <li>
+              <strong>האתר בעברית בלבד.</strong>
+              אין כרגע גרסה בשפה נוספת. בעברית, ערבית, אנגלית או רוסית אפשר
+              לפנות אליי ישירות בטלפון או בדוא"ל.
+            </li>
+          </ul>
+        </section>
+
+        <!-- ============ ACCESSIBILITY OF THE SERVICE ITSELF ============ -->
+        <section class="doc__section" aria-labelledby="a11y-service">
+          <h2 id="a11y-service" class="doc__h2">נגישות השירות עצמו</h2>
+          <p>
+            הטיפול כולו נעשה מרחוק: בטלפון, בוואטסאפ ובדוא"ל. אין צורך להגיע
+            למשרד בשום שלב, ולכן גם אין תלות בנגישות פיזית של מקום. המשרד אינו
+            פתוח לקבלת קהל ואין לו הסדרי נגישות פיזיים.
+          </p>
+          <p>
+            אם קשה להשתמש באתר מכל סיבה, אין בכך שום מניעה לקבל את השירות:
+            אפשר פשוט להתקשר או לכתוב, ואני אעבור על הדברים בעל פה. אם נוח
+            לך שאדם נוסף כמו בן משפחה, מתורגמן או מלווה יהיה בשיחה, זה בסדר
+            מצידי.
+          </p>
+        </section>
+
+        <!-- ============ HOW TO REPORT A PROBLEM ============ -->
+        <section class="doc__section doc__section--contact" aria-labelledby="a11y-contact">
+          <h2 id="a11y-contact" class="doc__h2">נתקלת במשהו שלא נגיש?</h2>
+          <p>
+            אשמח לדעת. פנייה על נגישות עוזרת לי לתקן דברים שלא ראיתי, ואני
+            עונה עליה אישית.
+          </p>
+
+          <dl class="doc__contact">
+            <dt>רכזת הנגישות</dt>
+            <dd>הילה נח זבליאנוב, רואת חשבון</dd>
+
+            <dt>טלפון</dt>
+            <dd>
+              <a href="tel:{{PHONE_TEL}}" data-surface="accessibility"><bdi>{{PHONE_DISPLAY}}</bdi></a>
+            </dd>
+
+            <dt>דוא"ל</dt>
+            <dd>
+              <a href="mailto:{{EMAIL}}" data-surface="accessibility"><bdi>{{EMAIL}}</bdi></a>
+            </dd>
+          </dl>
+
+          <p class="doc__note">
+            כדי שאוכל לטפל, עוזר לקבל את כתובת העמוד, את המכשיר והדפדפן, ואם
+            יש, את שם קורא המסך או תוכנת הסיוע שבשימוש.
+          </p>
+        </section>
+
+        <!-- ============ LEGAL BASIS ============ -->
+        <section class="doc__section" aria-labelledby="a11y-legal">
+          <h2 id="a11y-legal" class="doc__h2">המסגרת שלפיה נערכה ההצהרה</h2>
+          <p class="doc__legal">
+            ההצהרה נערכה לפי
+            <strong>תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות
+            לשירות), תשע"ג-2013</strong>, ולפי התקן הישראלי
+            <strong>ת"י <bdi>5568</bdi></strong>, המאמץ את הנחיות
+            <bdi>WCAG 2.0</bdi> ברמת התאמה <bdi>AA</bdi>.
+          </p>
+          <p class="doc__legal">
+            ההצהרה מתייחסת לאתר <bdi>{{SITE_HOST}}</bdi> בלבד, ואינה חלה על
+            אתרים חיצוניים שאליהם הוא מפנה.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    {{PAGE_FOOTER}}
+  </body>
+</html>

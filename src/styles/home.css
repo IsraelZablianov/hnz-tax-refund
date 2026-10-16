@@ -708,3 +708,78 @@
     padding-bottom: clamp(2.5rem, 6vw, 4rem);
   }
 }
+
+/* ============================================================
+   CONSENT NOTICE
+
+   Only ever visible when a GA4 measurement ID is configured and the visitor
+   has not yet chosen. Sits ABOVE the sticky bar on mobile — the WhatsApp
+   button is the conversion and must never be covered by a question about
+   statistics. Not a modal: no backdrop, no scroll lock, no focus trap.
+   ============================================================ */
+
+.consent {
+  position: fixed;
+  inset-inline: 0;
+  /* Clear the 56px sticky bar plus the home-indicator inset below it. */
+  inset-block-end: calc(56px + env(safe-area-inset-bottom));
+  z-index: 40; /* below .sticky-bar (50), deliberately */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem clamp(1rem, 4vw, 1.5rem);
+  background: var(--dark);
+  color: var(--text-on-dark);
+  border-block-start: 1px solid rgba(239, 236, 228, 0.16);
+}
+
+.consent__text {
+  flex: 1 1 16rem;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  opacity: 0.86;
+}
+
+.consent__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.consent__btn {
+  min-height: 40px;
+  padding-inline: 1.1rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-on-dark);
+  background: transparent;
+  border: 1px solid rgba(239, 236, 228, 0.36);
+  border-radius: 2px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.consent__btn--accept {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.consent__btn:hover {
+  border-color: rgba(239, 236, 228, 0.6);
+}
+
+.consent__btn--accept:hover {
+  background: var(--accent-hover);
+}
+
+@media (min-width: 62rem) {
+  .consent {
+    /* No sticky bar on desktop, so the notice sits on the viewport edge. */
+    inset-block-end: 0;
+    gap: 1rem 1.5rem;
+  }
+}

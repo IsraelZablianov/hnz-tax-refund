@@ -1,0 +1,261 @@
+/* ============================================================
+   DOCUMENT PAGES
+
+   Shared layer for the site's prose documents — currently the
+   accessibility statement, later the guides and /אודות.
+
+   It deliberately does NOT reuse home.css. home.css styles a
+   portrait-led landing page; a legal document wants a measure,
+   a reading rhythm and nothing else. Keeping them apart means
+   the accessibility page is also fully styled under `npm run dev`,
+   where each HTML entry only loads the stylesheets it links
+   (in production cssCodeSplit is off and it is all one file, so
+   relying on that would be a dev/prod divergence waiting to bite).
+
+   Tokens only. Logical properties only.
+   ============================================================ */
+
+/* ---------- header ---------- */
+
+.doc-head {
+  background: var(--dark);
+  color: var(--text-on-dark);
+  padding-block: 1.1rem;
+}
+
+.doc-head__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+}
+
+.doc-head__brand {
+  text-decoration: none;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+.doc-head__brand strong {
+  font-weight: 500;
+}
+
+.doc-head__brand span {
+  color: var(--text-on-dark-muted);
+  margin-inline-start: 0.5rem;
+}
+
+.breadcrumb {
+  font-size: var(--fs-micro);
+  color: var(--text-on-dark-muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.breadcrumb a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.breadcrumb [aria-current='page'] {
+  color: var(--text-on-dark);
+}
+
+/* ---------- body ---------- */
+
+.doc {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--space-section);
+}
+
+/* A document, so a real measure. 36rem of Hebrew at this leading is roughly
+   65 characters a line, which is the readable band. */
+.doc__wrap > * {
+  max-width: 38rem;
+}
+
+.doc__title {
+  font-size: clamp(2rem, 5.2vw, 3.1rem);
+  margin-bottom: 1.25rem;
+}
+
+.doc__lede {
+  max-width: 34rem;
+}
+
+.doc__meta {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.doc__section {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.doc__h2 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin-bottom: 1.5rem;
+}
+
+.doc__section p + p {
+  margin-top: 1rem;
+}
+
+.doc__note {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin-top: 1.25rem;
+}
+
+.doc__section--gaps .doc__note {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.doc__legal {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+}
+
+.doc__legal strong {
+  font-weight: 500;
+}
+
+.doc__kbd {
+  font-size: var(--fs-small);
+  padding: 0.1em 0.45em;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+/* ---------- the "what is implemented" definition list ----------
+   A <dl> rather than a <ul>: each item really is a term and its
+   description, and screen readers announce the pairing. */
+
+.doc__list {
+  margin: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.doc__list dt {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.doc__list dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding-inline-start: 1rem;
+  border-inline-start: 1px solid var(--rule);
+}
+
+/* ---------- the honest gaps ----------
+   Given real weight rather than being buried: on this site the
+   disclosure is the credibility. Same reasoning as the 1.4% block
+   on the homepage. */
+
+.doc__section--gaps {
+  background: var(--bg-step);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--radius);
+}
+
+.doc__section--gaps,
+.doc__section--contact {
+  max-width: 40rem;
+}
+
+.doc__gaps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.doc__gaps li {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text-muted);
+  padding-inline-start: 1rem;
+  border-inline-start: 2px solid var(--rule-strong);
+}
+
+.doc__gaps strong {
+  display: block;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ---------- contact ---------- */
+
+.doc__contact {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem 1.25rem;
+  align-items: baseline;
+  padding-block: 1.25rem 0;
+}
+
+.doc__contact dt {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.doc__contact dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ---------- footer ----------
+   Its own classes rather than reusing .site-footer: this page has no
+   sticky mobile bar, so it needs none of the bottom padding that one
+   carries, and the two should be free to diverge. */
+
+.doc-foot {
+  background: var(--dark);
+  color: var(--text-on-dark-muted);
+  font-size: var(--fs-small);
+  padding-block: clamp(2.25rem, 5vw, 3.25rem);
+}
+
+.doc-foot__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 52rem) {
+  .doc-foot__grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+.doc-foot strong {
+  color: var(--text-on-dark);
+  font-weight: 500;
+}
+
+.doc-foot__label {
+  font-size: var(--fs-micro);
+  color: var(--text-on-dark-muted);
+}
+
+.doc-foot__disclaimer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(239, 236, 228, 0.16);
+  font-size: var(--fs-micro);
+  line-height: 1.65;
+  max-width: 48rem;
+}

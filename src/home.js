@@ -13,6 +13,8 @@
 
 import { refundWindow, ledgerBarWidths } from './lib/refundWindow.js';
 import { remainingPhrase } from './lib/hebrew.js';
+import { initAnalytics } from './lib/analytics.js';
+import { mountConsentBar } from './lib/consent.js';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/home.css';
@@ -141,3 +143,19 @@ document.documentElement.classList.add('js');
 
 correctStaleYearData();
 wireReveal();
+
+/* ------------------------------------------------------------------
+   Analytics and consent. Last, and deliberately so.
+
+   Both are strictly additive and fail closed: with GA4_MEASUREMENT_ID null —
+   which is the current shipping state — initAnalytics() captures UTMs into
+   sessionStorage and returns, and mountConsentBar() renders nothing. No
+   network request, no cookie, no visible change.
+
+   They run after the content corrections above because nothing here may ever
+   delay the page being right. A WhatsApp tap must work whether or not any of
+   this executed, which is why track() swallows its own errors rather than
+   letting an analytics failure surface as a broken click.
+   ------------------------------------------------------------------ */
+initAnalytics();
+mountConsentBar();

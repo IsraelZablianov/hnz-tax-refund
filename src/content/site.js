@@ -89,7 +89,7 @@ export const GOV_LINKS = {
 export const SITE_URL = 'https://tax.hnz-cpa.com';
 
 /** og:site_name and the web manifest name. */
-export const SITE_NAME_HE = 'החזרי מס לשכירים — רו״ח הילה נח זבליאנוב';
+export const SITE_NAME_HE = 'החזרי מס לשכירים | רו״ח הילה נח זבליאנוב';
 export const SITE_SHORT_NAME_HE = 'החזרי מס · רו״ח הילה';
 
 /**
@@ -118,6 +118,29 @@ export const SAME_AS = Object.values(SOCIAL);
 export const OG_IMAGE_PATH = '/og-image.png';
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
+
+/**
+ * GA4 measurement ID.
+ *
+ * TODO(open-question-10): pending from Hila — she has to create the property.
+ *
+ * `null` is a working state, not a broken one: the analytics module no-ops and
+ * the consent bar never renders, so the site ships collecting nothing. The
+ * moment a real `G-XXXXXXXXXX` lands here, consent-gated GA4 turns on with no
+ * other change. Same pattern as LICENCE_NUMBER above — absent beats placeholder.
+ */
+export const GA4_MEASUREMENT_ID = null;
+
+/**
+ * Date this site was first published, ISO-8601, for schema `datePublished`.
+ *
+ * Hardcoded, and that is correct — same reasoning as ACCESSIBILITY_REVIEWED
+ * below. A publication date is a claim about one specific day. Deriving it from
+ * the build clock would re-date the site on every deploy and tell crawlers the
+ * content is brand new every time, which is both false and an E-E-A-T negative
+ * for YMYL content.
+ */
+export const SITE_PUBLISHED = '2026-10-17';
 
 /** Accessibility statement. Legally required — תקן ת"י 5568. */
 export const ACCESSIBILITY_SLUG = 'נגישות';

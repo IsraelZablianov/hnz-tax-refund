@@ -4,26 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>החזרי מס לשכירים | רו״ח הילה נח זבליאנוב</title>
-    <meta
-      name="description"
-      content="רואת חשבון מוסמכת משנת 2018, מתמחה בהחזרי מס לשכירים. ניתן לתבוע עד שש שנים אחורה. שנת המס {{EXPIRING_YEAR}} נסגרת ב-{{DEADLINE}}. בדיקת זכאות ללא עלות וללא התחייבות."
-    />
-    <link rel="canonical" href="https://hnz-cpa.com/" />
+    <!-- Title and description are injected from vite.config.js so the rendered
+         page, the Open Graph card and the schema WebPage node all read from one
+         definition and cannot drift apart. The copy itself is unchanged — see
+         metaByPage in vite.config.js. -->
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
     <meta name="theme-color" content="#30332f" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="he_IL" />
-    <meta property="og:title" content="החזרי מס לשכירים | רו״ח הילה נח זבליאנוב" />
-    <meta
-      property="og:description"
-      content="ניתן לתבוע מס ששולם ביתר עד שש שנים אחורה. שנת המס {{EXPIRING_YEAR}} נסגרת ב-{{DEADLINE}}."
-    />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+
+    <!-- Favicons, canonical, manifest, OG image and author — generated in
+         vite.config.js so the og:image dimensions and the manifest can never
+         disagree with the actual PNG. -->
+    {{HEAD_ASSETS}}
 
     <link rel="preload" href="/fonts/rubik-hebrew-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/src/styles/tokens.css" />
     <link rel="stylesheet" href="/src/styles/base.css" />
     <link rel="stylesheet" href="/src/styles/home.css" />
+
+    <!-- Structured data, built from src/content/site.js. What is deliberately
+         NOT here — FAQPage, HowTo, Review, AggregateRating — and why, is
+         documented at the top of src/lib/schema.js. Do not add them back. -->
+    {{JSONLD}}
   </head>
 
   <body>
@@ -49,7 +56,6 @@
                with the mandatory ancillary-service distinction. -->
           <p class="hero__credential">
             רואת חשבון מוסמכת משנת <bdi>2018</bdi> · מתמחה בהחזרי מס לשכירים
-            <span class="site-footer__service-label">(שירות נלווה)</span>
           </p>
 
           <!-- The H1 carries the DATE, never the day count: stable all year,
@@ -73,7 +79,7 @@
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="{{WA_HREF}}" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
+            <a class="btn btn--primary" href="{{WA_HREF_HERO}}" data-surface="hero" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
           </div>
           <p class="cta-note">ללא התחייבות · אני עונה אישית, לא בוט</p>
         </div>
@@ -164,9 +170,9 @@
         <div class="wrap">
           <h2 id="why-h" class="section__title">למה בכלל שילמת יותר מס</h2>
           <p class="triggers__lead">
-            המס מנוכה מהתלוש כל חודש לפי הנחה שתמשיך להשתכר אותו שכר כל השנה. כל
+            המס מנוכה מהתלוש כל חודש לפי הנחה שהשכר יישאר זהה כל השנה. כל
             שינוי כמו עבודה חדשה, חופשת לידה, מילואים או תואר שהסתיים יוצר פער בין
-            מה ששילמת למה שהיית צריך לשלם. את הפער הזה רשות המסים לא מחזירה
+            מה ששילמת למה שצריך היה לשלם. את הפער הזה רשות המסים לא מחזירה
             מיוזמתה.
           </p>
 
@@ -197,7 +203,7 @@
       <section class="section section--sand" aria-labelledby="honesty-h">
         <div class="wrap">
           <h2 id="honesty-h" class="section__title">
-            מה שחברות החזרי מס לא מספרות לך
+            מה שכדאי לדעת לפני שמגישים
           </h2>
           <div class="honesty__grid">
             <div>
@@ -217,7 +223,7 @@
                 בגלל זה אני בודקת ומדמה לפני שמגישים, ואומרת לך במפורש אם לא כדאי
                 להגיש שנה מסוימת. אפשר לבחור על אילו שנים מגישים ועל אילו לא.
               </p>
-              <p>ואם תעדיף לעשות את זה לבד, אפשר דרך רשות המסים:</p>
+              <p>ואם מעדיפים לעשות את זה לבד, אפשר דרך רשות המסים:</p>
               <div class="honesty__links">
                 <a href="https://www.gov.il/he/service/itc135" rel="noopener">
                   רשות המסים: בקשה להחזר מס (טופס <bdi>135</bdi>)
@@ -236,10 +242,15 @@
         <div class="wrap">
           <h2 id="privacy-h" class="section__title">מה קורה עם הפרטים שלך</h2>
           <ul class="details__list">
-            <li>בדיקת הזכאות באתר רצה בדפדפן שלך. שום נתון לא נשמר ולא נשלח.</li>
+            <li>באתר הזה אין טופס ואין מערכת שאוספת נתונים. הפנייה היא בוואטסאפ או בטלפון, ישירות אליי.</li>
             <li><strong>אני לא מבקשת מספר כרטיס אשראי. אף פעם.</strong></li>
             <li>ייפוי הכוח נחתם ישירות מולי, לא דרך גורם שלישי.</li>
             <li>ההחזר מגיע מרשות המסים ישירות לחשבון הבנק שלך.</li>
+            <li>
+              <strong>אני לא מתקשרת ביוזמתי.</strong> לפי הכללים שחלים עליי
+              כרואת חשבון אני עונה רק למי שפנה אליי. לכן אם מישהו התקשר והבטיח
+              סכום, זה לא יכול להיות אני.
+            </li>
           </ul>
         </div>
       </section>
@@ -274,10 +285,11 @@
         <div class="wrap">
           <h2 id="final-h" class="final__title">נבדוק מה פתוח אצלך</h2>
           <p class="final__sub">
-            שיחה אחת, בלי התחייבות. אם אין בסיס להחזר, אני אגיד לך את זה.
+            בדיקת הזכאות היא ללא עלות וללא התחייבות. אם אין בסיס להחזר, אני
+            אגיד את זה.
           </p>
-          <a class="btn btn--primary" href="{{WA_HREF}}" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
-          <a class="final__phone" href="tel:+972555582369">
+          <a class="btn btn--primary" href="{{WA_HREF_FINAL}}" data-surface="final" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
+          <a class="final__phone" href="tel:+972555582369" data-surface="final">
             <bdi>055-5582369</bdi>
           </a>
         </div>
@@ -296,8 +308,16 @@
           </div>
           <div>
             <p>
-              <a href="tel:+972555582369"><bdi>055-5582369</bdi></a><br />
+              <a href="tel:+972555582369" data-surface="footer"><bdi>055-5582369</bdi></a><br />
               <a href="mailto:hila@hnz-cpa.com"><bdi>hila@hnz-cpa.com</bdi></a>
+            </p>
+            <!-- Accessibility statement. Legally required on an Israeli
+                 commercial site — תקנות שוויון זכויות / ת"י 5568 — and the
+                 statutory expectation is that it is reachable from every
+                 page, which on this site means the footer. The href is
+                 injected because the Hebrew slug lives in site.js. -->
+            <p class="site-footer__service-label">
+              <a href="{{ACCESSIBILITY_HREF}}">{{ACCESSIBILITY_TITLE}} ←</a>
             </p>
           </div>
           <div>
@@ -317,10 +337,10 @@
 
     <!-- Sticky bar: mobile only, safe-area aware -->
     <nav class="sticky-bar" aria-label="פעולות מהירות">
-      <a class="sticky-bar__btn sticky-bar__btn--wa" href="{{WA_HREF}}" target="_blank" rel="noopener noreferrer">
+      <a class="sticky-bar__btn sticky-bar__btn--wa" href="{{WA_HREF_STICKY}}" data-surface="sticky" target="_blank" rel="noopener noreferrer">
         וואטסאפ
       </a>
-      <a class="sticky-bar__btn" href="tel:+972555582369">התקשרו</a>
+      <a class="sticky-bar__btn" href="tel:+972555582369" data-surface="sticky">התקשרו</a>
     </nav>
 
     <script type="module" src="/src/home.js"></script>

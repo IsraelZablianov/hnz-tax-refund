@@ -42,6 +42,22 @@ jobs:
         run: npm run build
 
       # Guard against the specific failure modes that matter for this site.
+      #
+      # Two layers, deliberately:
+      #
+      #   1. `npm run verify` (scripts/verify-dist.mjs) — the substantive
+      #      checks. It PARSES the JSON-LD rather than grepping for the script
+      #      tag, asserts real pixel dimensions out of the PNG headers, and
+      #      asserts the things that must be ABSENT: no streetAddress, no fee
+      #      in schema, no FAQPage/HowTo/Review/AggregateRating, and no licence
+      #      identifier while LICENCE_NUMBER is still null.
+      #
+      #   2. The shell checks below — the handful that must hold even if
+      #      someone breaks or deletes that script. Keep these cheap and
+      #      independent; anything needing real logic belongs in the script.
+      - name: Verify dist
+        run: npm run verify
+
       - name: Verify build output
         run: |
           set -e
@@ -60,18 +76,52 @@ jobs:
             fail "Unsubstituted template token in output"
           fi
 
+          # Deploy infrastructure. Without .nojekyll, GitHub Pages runs the
+          # output through Jekyll, which ignores paths beginning with _ and
+          # can mangle non-ASCII ones — i.e. exactly our Hebrew slug.
+          [ -f dist/.nojekyll ] || fail ".nojekyll missing — Jekyll will process the deploy"
+          [ -f dist/CNAME ]     || fail "CNAME missing — the custom domain will unbind"
+
+          # SEO plumbing and brand assets.
+          for f in robots.txt sitemap.xml favicon.svg favicon-32.png \
+                   apple-touch-icon.png og-image.png site.webmanifest; do
+            [ -f "dist/$f" ] || fail "dist/$f missing"
+          done
+
+          # The accessibility statement is legally required on an Israeli
+          # commercial site, and its URL is a Hebrew slug produced at build time
+          # from an ASCII source file. Assert the OUTPUT path, because that
+          # rename is the fragile part.
+          [ -f 'dist/נגישות/index.html' ] \
+            || fail "Accessibility statement missing at the Hebrew slug"
+          # Written as an `if` rather than `[ -f x ] && fail`: under `set -e`
+          # the latter aborts the script when the file is absent, which is the
+          # PASSING case.
+          if [ -f dist/accessibility.html ]; then
+            fail "ASCII accessibility.html left in dist — the slug rename did not run"
+          fi
+
+          grep -q 'application/ld+json' dist/index.html \
+            || fail "JSON-LD missing from the homepage"
+
           # Compliance tripwires. These strings are prohibited for a licensed
           # CPA under תקנות רואי חשבון — see docs/spec/02-constraints.md.
           # A build that contains them must not reach the public.
-          if grep -q 'חינם' dist/index.html; then
-            fail "Prohibited word 'חינם' found — use 'ללא עלות'"
-          fi
-          if grep -q 'מומחה' dist/index.html; then
-            fail "Prohibited word 'מומחה' found — only 'מתמחה' is permitted"
-          fi
-          if grep -q '7 שנים' dist/index.html; then
-            fail "Factually wrong: the income-tax window is 6 years, not 7"
-          fi
+          # Checked across EVERY emitted HTML document, not just the homepage.
+          for doc in $(find dist -name '*.html'); do
+            if grep -q 'חינם' "$doc"; then
+              fail "Prohibited word 'חינם' in $doc — use 'ללא עלות'"
+            fi
+            if grep -q 'מומחה' "$doc"; then
+              fail "Prohibited word 'מומחה' in $doc — only 'מתמחה' is permitted"
+            fi
+            if grep -q '7 שנים' "$doc"; then
+              fail "Factually wrong in $doc: the income-tax window is 6 years, not 7"
+            fi
+            # 2(ג)(4) requires the ancillary-service distinction on every page.
+            grep -q 'שירות נלווה' "$doc" \
+              || fail "$doc does not label the service as 'שירות נלווה'"
+          done
 
           echo "✓ build verified"
 

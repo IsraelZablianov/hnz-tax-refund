@@ -67,8 +67,8 @@ export const PROCESS = [
     detail: 'אני מחשבת שנה-שנה ומראה לך את התוצאה הצפויה לפני שמוגש משהו. כולל המקרה שבו לא כדאי להגיש שנה מסוימת.',
   },
   {
-    name: 'הגשה רק אחרי שאישרת',
-    detail: 'אתה רואה את הדוח לפני השידור. אני לא משדרת שום דבר שלא ראית ואישרת.',
+    name: 'הגשה רק אחרי אישור',
+    detail: 'הדוח מוצג לפני השידור. אני לא משדרת שום דבר שלא ראיתם ואישרתם.',
   },
   {
     name: 'הכסף נכנס',
@@ -76,6 +76,62 @@ export const PROCESS = [
   },
 ];
 
-/** Pre-filled WhatsApp message. Zero typing for the first tap. */
+/**
+ * Pre-filled WhatsApp messages. Zero typing for the first tap.
+ *
+ * WHY THERE IS MORE THAN ONE
+ * --------------------------
+ * `wa.me` discards query parameters, so UTMs do not survive the handoff — the
+ * lead lands in her inbox with no attribution whatsoever. GA4 records which
+ * surface was clicked, but she does not read GA4 while answering messages at
+ * 23:00, and GA4 only works once there is consent and a measurement ID.
+ *
+ * So the message itself carries the signal: each surface opens with naturally
+ * different wording, and she can tell at a glance whether someone tapped from
+ * the hero, the sticky bar, or after reading the whole page. The last of those
+ * is a materially warmer lead and worth answering first.
+ *
+ * Constraint: these are messages a real person sends about their own money. No
+ * tracking codes, no bracketed tokens, nothing that reads as machine output —
+ * a visible `[hero]` would undercut the one thing this site is selling.
+ */
+
+/** Hero — the visitor acted early, on the deadline alone. */
 export const WA_MESSAGE =
   'היי הילה, הגעתי מהאתר. אני שכיר/ה ואני רוצה לבדוק אם מגיע לי החזר מס 🙏';
+
+/** Sticky bar — mid-page, skimming. */
+export const WA_MESSAGE_STICKY =
+  'היי הילה, אני שכיר/ה ורוצה לבדוק אם מגיע לי החזר מס 🙏';
+
+/** Final CTA — read to the bottom, including the 1.4% section. Warmest. */
+export const WA_MESSAGE_FINAL =
+  'היי הילה, קראתי את הדף ואני רוצה שנבדוק אילו שנים פתוחות אצלי 🙏';
+
+/** Surface key → message. The key is also the GA4 `surface` event parameter. */
+export const WA_MESSAGES = {
+  hero: WA_MESSAGE,
+  sticky: WA_MESSAGE_STICKY,
+  final: WA_MESSAGE_FINAL,
+};
+
+/**
+ * Consent notice for analytics.
+ *
+ * NOT a pop-up and NOT a modal — תקנה 2(ב)(4) prohibits those, and this is a
+ * static bar at the end of the document that never covers the content or the
+ * WhatsApp button. It renders only when a GA4 measurement ID exists and the
+ * visitor has not already chosen, which today means it does not render at all.
+ *
+ * Why it exists: תיקון 13 to חוק הגנת הפרטיות took effect in 2025 and raised
+ * the stakes on personal-data handling materially. GA4 sets cookies, so it does
+ * not load until someone says yes. Declining is one tap and equally weighted —
+ * a greyed-out "no" is a dark pattern and would fail the "freely given" test.
+ */
+export const CONSENT = {
+  text: 'אני משתמשת בסטטיסטיקות שימוש אנונימיות כדי להבין אילו עמודים עוזרים. אין בהן פרטים מזהים.',
+  accept: 'אפשר',
+  decline: 'לא, תודה',
+  label: 'הודעה על סטטיסטיקות שימוש',
+};
+

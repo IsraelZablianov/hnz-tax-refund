@@ -8,6 +8,9 @@ dist/
 .env
 .env.local
 
+# Transient note between two concurrent agent sessions. Never ships.
+AGENT-HANDOFF.md
+
 # impeccable-ignore-start
 # Ephemeral output, runtime state, and per-dev overrides.
 # Shared artifacts stay tracked: config.json, live/config.json,

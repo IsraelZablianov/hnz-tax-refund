@@ -30,9 +30,16 @@
 
       ── Why the copy is what it is ──────────────────────────────────────────
       No fee, no percentage, no shekel amount, no superlative, no testimonial,
-      no client result, no "חינם". Only: her name, her title, her seniority,
+      no client result, and none of the words on the prohibited list in
+      docs/spec/02-constraints.md. Only: her name, her title, her seniority,
       her field of practice with the mandatory שירות נלווה label, and a
-      statement of law with its source. See docs/spec/02-constraints.md.
+      statement of law with its source.
+
+      This file is SERVED, not just a build input — it ends up in dist/ so the
+      card can be regenerated from a deployed checkout. So the compliance
+      tripwires in .github/workflows/deploy.yml scan it like any other page,
+      comments included. That is why the prohibited words are described here
+      rather than quoted.
     -->
 
     <style>
@@ -208,7 +215,7 @@
           <g fill="#efece4">
             <rect x="10" y="7" width="3" height="18" />
             <rect x="19" y="7" width="3" height="18" />
-            <rect x="6" y="14" width="20" height="4" />
+            <rect x="8" y="14" width="16" height="3" />
           </g>
         </svg>
 

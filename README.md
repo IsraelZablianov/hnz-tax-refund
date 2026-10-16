@@ -50,9 +50,12 @@ a limitation to work around.
 | Year math + Hebrew helpers | Shipped, under test (`npm test`) |
 | Content layer (`src/content/`) | Shipped — no Hebrew string or contact detail lives outside it |
 | Homepage `/` with the to-scale years ledger | Shipped |
-| Pages deploy + compliance tripwires | Shipped |
+| Deploy infrastructure — `robots.txt`, generated `sitemap.xml`, favicons, web manifest, OG card, `.nojekyll` | Shipped |
+| JSON-LD — `AccountingService`, `Person` + `hasCredential`, `Service`, `BreadcrumbList` | Shipped, injected at build time |
+| `/נגישות/` accessibility statement | Shipped — legally required, `תקן ת"י 5568` |
+| Pages deploy + compliance tripwires + `npm run verify` | Shipped |
 | Eligibility quiz, `/אודות`, guides, city page, remaining routes | Planned — see [`docs/spec/08-plan.md`](docs/spec/08-plan.md) |
-| Licence number, extra photography, exact subdomain | Open questions blocking specific pages (`08-plan.md`) |
+| Licence number, GA4 property, extra photography | Open questions blocking specific pages (`08-plan.md`) |
 
 ## Quick start
 
@@ -60,11 +63,29 @@ Node 22 (what CI uses).
 
 ```bash
 npm install
-npm run dev      # dev server
-npm run build    # production build — injects year data at build time
+npm run dev      # dev server; Hebrew slugs are rewritten like production
+npm run build    # production build — injects year data, schema and head at build time
+npm run verify   # assert dist/ is shippable — run after every build
 npm run preview  # serve the build locally
 npm test         # vitest — year math and Hebrew plural agreement
 npm run test:watch
+npm run images   # regenerate the favicons and OG card (needs a browser)
+```
+
+### Regenerating the brand images
+
+The favicon PNGs and the Open Graph card are committed, but generated from
+checked-in sources — `public/favicon.svg` and `public/og-image.html` — so they
+are reproducible rather than mysterious. Edit the source, re-render, commit the
+PNGs. Never edit a PNG directly.
+
+`playwright-core` is deliberately **not** a dependency: the site ships ~1.8 kB of
+gzipped JS and a browser download is not worth three files that change roughly
+never. Point the script at an existing install, or at a running browser:
+
+```bash
+PLAYWRIGHT=/path/to/node_modules/playwright-core npm run images
+CDP_URL=http://127.0.0.1:9090 npm run images
 ```
 
 ## How it works
@@ -86,6 +107,25 @@ dist/index.html                  complete page, correct without JS
 corrects a stale build client-side + wires the scroll reveal
 ```
 
+Everything else in the `<head>` is injected from the same place, from one
+definition each, so the rendered page and the machine-readable copy of it cannot
+disagree:
+
+```
+src/content/routes.js    path, source file, sitemap priority — one entry per page
+src/content/site.js      NAP, licence, origin, service areas
+        ↓
+src/lib/urls.js          absoluteUrl() — percent-encoded, one host, checked against CNAME
+src/lib/schema.js        the JSON-LD @graph, stable @ids
+        ↓ (build time)
+vite.config.js           <title>, meta description, OG/Twitter, canonical, JSON-LD,
+                         the shared footer, and dist/sitemap.xml
+```
+
+`<title>`, the meta description and the schema `WebPage` node are the *same
+string*. `npm run verify` asserts that byte for byte — structured data that
+contradicts the page it describes is worse than no structured data.
+
 The three-layer defence against a stale date exists because a wrong year here is
 a wrong statement about someone's legal rights:
 
@@ -103,24 +143,98 @@ because the statutory trigger is that the return is *filed* and reconstructing a
 six-year-old `טופס 106` takes weeks — advertising it as open would risk being
 misleading under `§2(א) חוק הגנת הצרכן`.
 
+## Routes
+
+| URL | Source | Notes |
+| --- | --- | --- |
+| `/` | `index.html` | The money page |
+| `/נגישות/` | `accessibility.html` | Legally required under `תקן ת"י 5568` |
+
+URLs are Hebrew; **source filenames are not.** Hebrew filenames are a known
+failure class on CI runners and in git tooling, so `accessibility.html` is an
+ASCII entry point and the `hnz-hebrew-slugs` plugin renames the output to
+`נגישות/index.html`, which Pages serves as a directory index. Canonicals and the
+sitemap use the percent-encoded form, consistently.
+
+Verified by real deploy, not inference — Gate 0 in
+[`docs/spec/08-plan.md`](docs/spec/08-plan.md). Percent-encoded paths, nested
+percent-encoded paths, and the raw UTF-8 a user pastes from WhatsApp all return
+200 on GitHub Pages. The dev server rewrites the same slugs, so `/נגישות/` works
+locally exactly as it does in production.
+
+`src/content/routes.js` is the one place a route is declared. The build derives
+`rollupOptions.input`, the slug renames and `sitemap.xml` from it, so a page
+cannot exist in one of those and not the others. Adding a page means an entry
+there plus its `<head>` metadata in `vite.config.js`; the build fails with a
+pointed message if either is missing.
+
+Eight more pages are planned in
+[`docs/spec/03-architecture.md`](docs/spec/03-architecture.md). `shipped: false`
+routes are deliberately excluded from the sitemap — advertising a URL that 404s
+is a self-inflicted crawl error.
+
+## SEO & structured data
+
+`src/lib/schema.js` builds one `@graph` per page with stable `@id`s, so every
+page references the business rather than restating it. Duplicated entities with
+slightly different values are how one knowledge-graph entity gets split in two;
+`npm run verify` compares the shared nodes across pages byte for byte.
+
+Two decisions worth knowing before you touch it:
+
+**`streetAddress` is deliberately omitted.** She is a service-area business
+working from a home office with no exterior signage, so her Google Business
+Profile hides the address and schema must match what the profile shows. This
+means Google's Rich Results Test reports the business node as invalid, because
+`address` with a street is a required property. **That is the correct
+trade-off** — we lose a rich result we were unlikely to get, and keep the profile
+and the truth. `npm run verify` fails if a street address is ever added, so the
+"fix" cannot ship silently.
+
+**The licence number degrades gracefully.** `LICENCE_NUMBER` is currently `null`
+(pending from Hila). While it is null, neither the visible credential block nor
+the JSON-LD emits it — structured data must match visible content, and a
+placeholder identifier would be an unevidenced claim about a regulated
+credential. Set the constant and both appear, verified against each other.
+
 ## Layout
 
 ```
 index.html              homepage template, {{TOKENS}} filled at build time
-vite.config.js          the injection plugin + build-time guards
+accessibility.html      → /נגישות/   (ASCII source, Hebrew output slug)
+vite.config.js          build-time injection, slug renames, sitemap, guards
+scripts/
+  render-images.mjs     og-image.html + favicon.svg → PNGs (manual, needs a browser)
+  verify-dist.mjs       post-build assertions — npm run verify, also run by CI
 src/
   home.js               runtime: stale-build correction, scroll reveal
-  lib/refundWindow.js   §160 year math — single source of truth
+  lib/refundWindow.js   §160 year math — single source of truth for dates
   lib/hebrew.js         Hebrew plural agreement, month/year formatting
-  lib/*.test.js         vitest coverage for both
+  lib/urls.js           absoluteUrl(), and the canonical-host guard
+  lib/schema.js         the JSON-LD @graph — build-time only, never bundled
+  lib/*.test.js         vitest coverage for the year math and Hebrew helpers
+  content/routes.js     the route table — paths, source files, sitemap metadata
   content/site.js       canonical business facts: name, phone, licence, areas, gov links
   content/copy.js       Hebrew copy blocks (triggers, process, WhatsApp message)
   styles/tokens.css     design tokens
-  styles/{base,home}.css
-public/                 CNAME, self-hosted Rubik subsets (Hebrew + Latin)
+  styles/{base,home,doc}.css
+public/
+  .nojekyll             stops Jekyll mangling the Hebrew slug
+  CNAME                 tax.hnz-cpa.com
+  favicon.svg           the HNZ mark — source of both PNGs
+  favicon-32.png        32×32, generated
+  apple-touch-icon.png  180×180, generated
+  og-image.html         source of the OG card — edit this, not the PNG
+  og-image.png          1200×630, generated
+  robots.txt            allow all, points at the sitemap
+  site.webmanifest      Hebrew name, RTL
+  fonts/                self-hosted Rubik subsets (Hebrew + Latin)
 docs/spec/              the spec — intent, constraints, architecture, copy deck,
                         funnel, design, SEO, build plan
 ```
+
+`sitemap.xml` is **generated into `dist/`**, never committed, so `lastmod` cannot
+go stale. Do not add a hand-maintained one to `public/`.
 
 ## Hard rules
 
@@ -146,23 +260,95 @@ These are the ones that break the site — or her licence — when ignored.
 - **Schema:** add `AccountingService`, `BreadcrumbList`, `ProfilePage` +
   `Person` + `hasCredential`, `Article`. Do **not** add `FAQPage`, `HowTo`, or
   `Review`/`AggregateRating` — deprecated, ineligible, and in the last case
-  prohibited by the conduct rules.
+  prohibited by the conduct rules. **No fee in schema either:** a `priceRange`
+  is a published fee just as much as one in the body copy.
 - **It is 6 years, not 7.** The figure "7 years" is factually wrong for income
   tax. National Insurance runs a different, longer window; never conflate them.
+
+## Verification
+
+`npm run verify` runs [`scripts/verify-dist.mjs`](scripts/verify-dist.mjs)
+against `dist/` — every assertion is a failure mode this site
+specifically cares about:
+
+- Every required file is present: `.nojekyll`, `CNAME`, `robots.txt`,
+  `sitemap.xml`, the favicons, `og-image.png`, `site.webmanifest`, and the
+  accessibility page **at its Hebrew slug** (with the ASCII original gone).
+- JSON-LD is **parsed with `JSON.parse`**, not grepped. A `grep` for the script
+  tag proves it exists, not that it is valid — and invalid JSON-LD is silently
+  ignored by Google, which is exactly the failure worth catching.
+- `<title>` and the meta description equal the schema `WebPage` values.
+- The things that must be **absent**: no `streetAddress`, no fee in any of the
+  shapes schema.org offers, no `FAQPage` / `HowTo` / `Review` /
+  `AggregateRating`, no licence identifier while `LICENCE_NUMBER` is null.
+- Shared schema nodes are byte-identical across pages.
+- Image dimensions read out of the **PNG headers**, not inferred from filenames.
+- The sitemap lists exactly the shipped routes; year-derived pages carry the
+  build date, and the accessibility statement keeps its fixed review date.
+- Primary content is in the static HTML, and the prose page ships no JS bundle.
+- The compliance tripwires, across every emitted document.
 
 ## CI
 
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs on push to
-`main`, on 1 January, and on demand. It tests, builds, then refuses to deploy
-unless the output passes a set of tripwires:
+`main`, on 1 January, and on demand:
+
+```
+checkout → npm ci → npm test → npm run build → npm run verify
+        → shell tripwires → upload-pages-artifact → deploy-pages
+```
+
+Two layers, deliberately. `npm run verify` carries the substantive checks; the
+shell step repeats the handful that must hold even if someone breaks or deletes
+that script:
 
 - the years ledger and all refund triggers are present in the **static** HTML
 - the WhatsApp link is present
 - no unsubstituted `{{TOKEN}}` survives
-- no prohibited term appears in the shipped page — `חינם` (use `ללא עלות`),
+- `.nojekyll` and `CNAME` are in the output, and the Hebrew-slug page exists
+- every emitted document labels the service `שירות נלווה`
+- no prohibited term appears in any shipped document — `חינם` (use `ללא עלות`),
   `מומחה` (only `מתמחה` is permitted), or the wrong `7 שנים` figure
 
 A build that fails any of these is not published.
+
+## Custom domain
+
+Served from `tax.hnz-cpa.com` via a DNS `CNAME`, **`public/CNAME`** in the repo
+(Pages reads it on every deploy; if it goes missing the domain unbinds), and
+HTTPS enforced by GitHub.
+
+`public/.nojekyll` is equally load-bearing: without it Pages runs the output
+through Jekyll, which ignores paths beginning with `_` and can mangle non-ASCII
+ones — i.e. exactly our Hebrew slug.
+
+`SITE_URL` in `src/content/site.js` is the single origin, and the build checks
+it against `public/CNAME` on every run. A canonical naming a host we do not
+serve tells Google the authoritative copy of the page lives somewhere that does
+not contain this content.
+
+> GitHub Pages cannot serve server-side 301s. Acceptable today because the
+> subdomain is new and there is nothing to redirect. If the apex is ever pointed
+> here, redirects become a real requirement and Cloudflare Pages should be
+> reconsidered — it deploys from the same repo, so that is a migration, not a
+> rewrite.
+
+## Open questions
+
+Tracked as `TODO(open-question-N)` in the source:
+
+1. **Licence number** — pending. Highest-value trust element available and it
+   costs nothing. Set `LICENCE_NUMBER`; the credential block and the JSON-LD
+   both light up and are verified against each other.
+2. **GA4 measurement ID** — pending. `null` is a working state: analytics
+   no-ops and the consent bar never renders.
+3. **The fee model** — displaying no fee removes the advertising exposure but
+   not the `1א(14)` conduct question about contingent fees. Must be resolved
+   before the first engagement letter.
+4. **`priceRange: "₪₪"`** — `07-seo.md` calls it acceptable in schema;
+   `02-constraints.md` puts any fee range on the RED list and declares itself
+   the tie-breaker when they disagree. Currently emitted. Flagged for the
+   `§11א` pre-ruling.
 
 ## Licence
 

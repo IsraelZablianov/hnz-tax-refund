@@ -10,7 +10,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "verify": "node scripts/verify-dist.mjs",
+    "images": "node scripts/render-images.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",
