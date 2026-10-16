@@ -52,8 +52,11 @@
         </div>
 
         <div class="hero__body wrap">
-          <!-- Permitted facts only: seniority 2(ג)(3), field of practice 2(ג)(4),
-               with the mandatory ancillary-service distinction. -->
+          <!-- Permitted facts only: seniority 2(ג)(3) and field of practice
+               2(ג)(4). The שירות נלווה distinction that 2(ג)(4) requires is
+               carried ONCE per page, in the footer — deliberately not repeated
+               here. Do not re-add it: saying it twice on one page reads as
+               hedging, and the footer placement already satisfies the rule. -->
           <p class="hero__credential">
             רואת חשבון מוסמכת משנת <bdi>2018</bdi> · מתמחה בהחזרי מס לשכירים
           </p>
@@ -79,7 +82,15 @@
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="{{WA_HREF_HERO}}" data-surface="hero" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
+            <!-- Names the job, then the channel. The previous label, "דברו איתי
+                 בוואטסאפ", named only the medium and was the page's one plural
+                 imperative in otherwise singular copy ("השנים הפתוחות שלך",
+                 "אם תעדיף") — a small register break in the exact place the
+                 "one person, personally" positioning has to hold. A verbal
+                 noun carries no grammatical number, so the conflict goes away
+                 while "וואטסאפ" still sets the expectation of where the tap
+                 leads, which matters for trust on a money question. -->
+            <a class="btn btn--primary" href="{{WA_HREF_HERO}}" data-surface="hero" target="_blank" rel="noopener noreferrer">לבדיקת זכאות בוואטסאפ</a>
           </div>
           <p class="cta-note">ללא התחייבות · אני עונה אישית, לא בוט</p>
         </div>
@@ -288,9 +299,14 @@
             בדיקת הזכאות היא ללא עלות וללא התחייבות. אם אין בסיס להחזר, אני
             אגיד את זה.
           </p>
-          <a class="btn btn--primary" href="{{WA_HREF_FINAL}}" data-surface="final" target="_blank" rel="noopener noreferrer">דברו איתי בוואטסאפ</a>
-          <a class="final__phone" href="tel:+972555582369" data-surface="final">
-            <bdi>055-5582369</bdi>
+          <!-- Matches the heading's register: "נבדוק" / "נתחיל" are first-person
+               plural inclusive — "let's check", the two of us — not an imperative
+               aimed at the reader. That is the cooperative voice the whole page
+               uses, and it is the opposite of how the refund factories address
+               people. Avoid "דברו"/"השאירו" imperatives anywhere on this page. -->
+          <a class="btn btn--primary" href="{{WA_HREF_FINAL}}" data-surface="final" target="_blank" rel="noopener noreferrer">נתחיל בוואטסאפ</a>
+          <a class="final__phone" href="tel:{{PHONE_TEL}}" data-surface="final">
+            <bdi>{{PHONE_DISPLAY}}</bdi>
           </a>
         </div>
       </section>
@@ -308,8 +324,8 @@
           </div>
           <div>
             <p>
-              <a href="tel:+972555582369" data-surface="footer"><bdi>055-5582369</bdi></a><br />
-              <a href="mailto:hila@hnz-cpa.com"><bdi>hila@hnz-cpa.com</bdi></a>
+              <a href="tel:{{PHONE_TEL}}" data-surface="footer"><bdi>{{PHONE_DISPLAY}}</bdi></a><br />
+              <a href="mailto:{{EMAIL}}" data-surface="footer"><bdi>{{EMAIL}}</bdi></a>
             </p>
             <!-- Accessibility statement. Legally required on an Israeli
                  commercial site — תקנות שוויון זכויות / ת"י 5568 — and the
@@ -340,7 +356,7 @@
       <a class="sticky-bar__btn sticky-bar__btn--wa" href="{{WA_HREF_STICKY}}" data-surface="sticky" target="_blank" rel="noopener noreferrer">
         וואטסאפ
       </a>
-      <a class="sticky-bar__btn" href="tel:+972555582369" data-surface="sticky">התקשרו</a>
+      <a class="sticky-bar__btn" href="tel:{{PHONE_TEL}}" data-surface="sticky">שיחה</a>
     </nav>
 
     <script type="module" src="/src/home.js"></script>
