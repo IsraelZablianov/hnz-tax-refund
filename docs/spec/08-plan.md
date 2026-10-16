@@ -132,15 +132,20 @@ the agent that wrote a sentence is the worst judge of whether it is compliant.
 
 | # | Question | Blocks |
 | --- | --- | --- |
-| 1 | **Licence number** | `/אודות`, footer, `Person` schema. The highest-value trust element and it is free |
-| 2 | **2–3 more photographs** | Nothing blocks, but the design is weaker without them. All three comps independently flagged the single studio frame as a limitation. With testimonials prohibited by `02`, imagery carries load one waist-up shot cannot. Wanted: a working shot, a second portrait at a different crop, and ideally a short talking-to-camera video — all explicitly permitted by `2(ד)`, and she already makes this content well on Instagram |
-| 3 | Is she an ICPAS member? | Whether `2(ג)(12)` applies — and see the `02` flag on whether membership is net-negative here |
-| 4 | Real business hours for callbacks | The response-time promise must be one she can keep |
-| 5 | Comfortable with the honesty block and the gov.il links? | The honesty section. **Verify explicitly — it is counter-intuitive and she may react badly without the reasoning** |
-| 6 | Existing company or second `עוסק מורשה`? | Nothing on the site; informs the fee-model question |
-| 7 | Exact subdomain | DNS, canonicals, Search Console |
-| 8 | Keep `card.hnz-cpa.com` indexed? | Recommend `noindex` or redirect — it currently competes for brand queries with near-empty content |
-| 9 | **Fee model: flat or percentage?** | Nothing on the site. Must be resolved before her first engagement letter |
+| 1 | **2–3 more photographs** | Nothing blocks, but the design is weaker without them. All three comps independently flagged the single studio frame as a limitation. With testimonials prohibited by `02` **and the licence number withheld**, imagery now carries more load than one waist-up shot can. Wanted: a working shot, a second portrait at a different crop, and ideally a short talking-to-camera video — all explicitly permitted by `2(ד)`, and she already makes this content well on Instagram |
+| 2 | Is she an ICPAS member? | Whether `2(ג)(12)` applies — and see the `02` flag on whether membership is net-negative here |
+| 3 | Real business hours for callbacks | The response-time promise must be one she can keep |
+| 4 | Comfortable with the honesty block and the gov.il links? | The honesty section. **Verify explicitly — it is counter-intuitive and she may react badly without the reasoning** |
+| 5 | Existing company or second `עוסק מורשה`? | Nothing on the site; informs the fee-model question |
+| 6 | Keep `card.hnz-cpa.com` indexed? | Recommend `noindex` or redirect — it currently competes for brand queries with near-empty content |
+| 7 | **Fee model: flat or percentage?** | Nothing on the site. Must be resolved before her first engagement letter |
+
+### Settled, no longer open
+
+| Decision | Outcome |
+| --- | --- |
+| **Subdomain** | **`tax.hnz-cpa.com`** — DNS live, HTTPS enforced, Pages deploying from `main` |
+| **Licence number** | **Not published.** Owner's decision, 17 Oct 2026. Code degrades gracefully: the credentials line is omitted and the `Person` schema omits `identifier`. The visible register link was also removed at her request. Recorded in `src/content/site.js` as a decision so no future agent re-opens it |
 
 ## Immediate actions for Hila — independent of the build
 

@@ -16,14 +16,28 @@ export const TITLE_SHORT = 'רו״ח'; // gershayim U+05F4, one form site-wide
 export const LICENSED_SINCE = 2018;
 
 /**
- * TODO(open-question-1): licence number, pending from Hila.
- * Highest-value trust element available and it costs nothing.
- * Until it arrives, the credential block renders without it rather than
- * rendering a placeholder — structured data must match visible content.
+ * DECIDED (17 Oct 2026): the licence number is NOT published on this site.
+ *
+ * This is a settled client decision, not a missing asset — do not add a TODO,
+ * do not prompt for it, and do not emit a placeholder. Everything that consumes
+ * it already degrades gracefully: the credentials block omits the line, and the
+ * Person schema omits the `identifier` property.
+ *
+ * Context for anyone revisiting this: the number IS public (searchable by name
+ * in the משרד המשפטים CPA register), and publishing it was identified in
+ * research as the strongest available trust signal. The owner nonetheless
+ * prefers not to display it. Respect that unless she says otherwise.
+ *
+ * Consequence: the trust engine rests instead on her name and photograph,
+ * seniority since 2018, degree and institution, the transparency of the stated
+ * process, and the honest-disclosure block. See docs/spec/02-constraints.md.
  */
 export const LICENCE_NUMBER = null;
 
-/** The public register, so visitors can verify the licence themselves. */
+/**
+ * The public register. Retained for schema `recognizedBy` only — per the
+ * owner's decision this is NOT surfaced as a visible link in the UI.
+ */
 export const LICENCE_REGISTER_URL =
   'https://www.gov.il/he/departments/dynamiccollectors/cpa-search';
 
