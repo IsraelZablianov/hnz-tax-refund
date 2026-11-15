@@ -1,0 +1,141 @@
+<!doctype html>
+<!--
+  ABOUT — /אודות/
+
+  The E-E-A-T keystone for a YMYL site: who is behind the advice, what she is
+  licensed to do, and how the work is actually done. The ProfilePage + Person
+  schema for this document is built in src/lib/schema.js (kind: 'profile').
+
+  COPY RULES (docs/spec/02-constraints.md)
+  - Only items on the closed 2(ג) list: name, seniority since 2018, degree,
+    contact details, languages, field of practice (labelled שירות נלווה in the
+    footer).
+  - No licence number (owner's decision, see src/content/site.js), no client
+    results, no superlative, no fee.
+  - Source filename is ASCII; vite.config.js renames the output to אודות/index.html.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="theme-color" content="#30332f" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+
+    {{HEAD_ASSETS}}
+
+    <link rel="preload" href="/fonts/rubik-hebrew-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/doc.css" />
+
+    {{JSONLD}}
+  </head>
+
+  <body>
+    <a class="visually-hidden" href="#main">דלג לתוכן</a>
+
+    <header class="doc-head">
+      <div class="wrap doc-head__inner">
+        <a class="doc-head__brand" href="/">
+          <strong>הילה נח זבליאנוב</strong>
+          <span>רואת חשבון</span>
+        </a>
+        <nav class="breadcrumb" aria-label="מסלול ניווט">
+          <a href="/">דף הבית</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">אודות</span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap doc__wrap">
+        <h1 class="doc__title">הילה נח זבליאנוב, רואת חשבון</h1>
+
+        <p class="statement doc__lede">
+          אני רואת חשבון מוסמכת משנת <bdi>2018</bdi> ומתמחה בהחזרי מס
+          לשכירים. את הבדיקה של כל תיק אני עושה בעצמי, וגם חותמת על הדוח
+          שמוגש לרשות המסים.
+        </p>
+
+        <section class="doc__section" aria-labelledby="about-creds">
+          <h2 id="about-creds" class="doc__h2">רקע מקצועי</h2>
+          <dl class="doc__list">
+            <dt>הסמכה</dt>
+            <dd>רואת חשבון מוסמכת משנת <bdi>2018</bdi>.</dd>
+
+            <dt>השכלה</dt>
+            <dd>
+              תואר ראשון במנהל עסקים וראיית חשבון, הקריה האקדמית אונו.
+            </dd>
+
+            <dt>עיסוק</dt>
+            <dd>
+              משרד עצמאי בחולון. אני מטפלת בדוחות מס ובליווי של עצמאים דרך
+              קבע, ומתמחה בהחזרי מס לשכירים (שירות נלווה).
+            </dd>
+
+            <dt>שפות</dt>
+            <dd>עברית ואנגלית.</dd>
+
+            <dt>אזורי שירות</dt>
+            <dd>
+              {{SERVICE_AREAS}}
+            </dd>
+          </dl>
+        </section>
+
+        <section class="doc__section" aria-labelledby="about-how">
+          <h2 id="about-how" class="doc__h2">איך עובדת הבדיקה</h2>
+          <p>
+            הבדיקה מתחילה בשיחה על מה שקרה אצלך בשש השנים האחרונות: החלפת
+            עבודה, תקופה בלי עבודה, לידה, מילואים, לימודים. לפי זה אני יודעת
+            אם בכלל שווה לפתוח תיק.
+          </p>
+          <p>
+            אחר כך אני אוספת את הטפסים, מחשבת כל שנה בנפרד ומראה לך את
+            התוצאה לפני שמוגש משהו. אם לא כדאי להגיש שנה מסוימת, אגיד לך את
+            זה במפורש. שום דבר לא נשלח לרשות המסים בלי האישור שלך.
+          </p>
+          <p>
+            ההחזר, אם יש, מגיע מרשות המסים ישירות לחשבון הבנק שלך. אני לא
+            מבקשת מספר כרטיס אשראי. אף פעם.
+          </p>
+          <p class="doc__note">
+            אפשר גם להגיש בלי רואת חשבון, ללא עלות, דרך רשות המסים. את
+            השלבים תמצאו ב<a href="{{GUIDE_FILE_HREF}}">מדריך איך מבקשים החזר מס</a>.
+          </p>
+        </section>
+
+        <section class="doc__section doc__section--contact" aria-labelledby="about-contact">
+          <h2 id="about-contact" class="doc__h2">יצירת קשר</h2>
+          <dl class="doc__contact">
+            <dt>וואטסאפ</dt>
+            <dd>
+              <a href="{{WA_HREF_FINAL}}" rel="noopener" data-surface="about">שליחת הודעה</a>
+            </dd>
+
+            <dt>טלפון</dt>
+            <dd>
+              <a href="tel:{{PHONE_TEL}}" data-surface="about"><bdi>{{PHONE_DISPLAY}}</bdi></a>
+            </dd>
+
+            <dt>דוא"ל</dt>
+            <dd>
+              <a href="mailto:{{EMAIL}}" data-surface="about"><bdi>{{EMAIL}}</bdi></a>
+            </dd>
+          </dl>
+        </section>
+      </div>
+    </main>
+
+    {{PAGE_FOOTER}}
+  </body>
+</html>

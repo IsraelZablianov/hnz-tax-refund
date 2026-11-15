@@ -259,3 +259,20 @@
   line-height: 1.65;
   max-width: 48rem;
 }
+
+/* ---------- guides: bullet and numbered lists ---------- */
+
+.doc__bullets,
+.doc__steps {
+  margin-top: 1rem;
+  padding-inline-start: 1.4rem;
+}
+
+.doc__bullets li + li,
+.doc__steps li + li {
+  margin-top: 0.6rem;
+}
+
+.doc__steps strong {
+  font-weight: 500;
+}

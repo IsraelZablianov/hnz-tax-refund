@@ -77,8 +77,8 @@ describe('buildSitemap', () => {
   });
 
   it('omits unshipped routes — a sitemap entry that 404s is worse than none', () => {
-    expect(xml).not.toContain('אודות');
-    expect(xml).not.toContain('%D7%90%D7%95%D7%93%D7%95%D7%AA'); // /אודות/
+    expect(xml).not.toContain('צור-קשר');
+    expect(xml).not.toContain(encodeURI('/צור-קשר/'));
   });
 
   it('emits no raw Hebrew', () => {

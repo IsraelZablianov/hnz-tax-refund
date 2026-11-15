@@ -35,6 +35,12 @@ const DIST = path.join(ROOT, 'dist');
 const A11Y_ROUTE = routeBySource('accessibility.html');
 const A11Y_FILE = `${A11Y_ROUTE.path.replace(/^\/|\/$/g, '')}/index.html`;
 
+/** Output files for the E-E-A-T and AI-citation pages. */
+const outFile = (source) =>
+  `${routeBySource(source).path.replace(/^\/|\/$/g, '')}/index.html`;
+const ABOUT_FILE = outFile('about.html');
+const GUIDE_FILE = outFile('guide-how-to-file.html');
+
 const failures = [];
 const checks = [];
 
@@ -296,6 +302,8 @@ if (a11yLd) {
 for (const [file, label] of [
   ['index.html', 'index.html'],
   [A11Y_FILE, 'נגישות/index.html'],
+  [ABOUT_FILE, 'אודות/index.html'],
+  [GUIDE_FILE, 'מדריך: איך מבקשים החזר מס'],
 ]) {
   const html = read(file);
 
@@ -323,6 +331,39 @@ for (const [file, label] of [
 
   // No unsubstituted tokens, and no leftover template syntax.
   check(`${label}: no {{TOKEN}} left`, !/\{\{[A-Z_]+\}\}/.test(html));
+}
+
+/* ================================================================
+   3b. /אודות and the guide: the pages AI assistants will quote
+   ================================================================ */
+
+{
+  const aboutLd = parseJsonLd(ABOUT_FILE, 'אודות/index.html');
+  const guideLd = parseJsonLd(GUIDE_FILE, 'מדריך');
+  const about = read(ABOUT_FILE);
+  const guide = read(GUIDE_FILE);
+
+  const profile = (aboutLd?.['@graph'] ?? []).find((n) =>
+    [].concat(n['@type']).includes('ProfilePage'),
+  );
+  check('אודות: ProfilePage points at the one Person node', profile?.mainEntity?.['@id'] === NODE.person);
+
+  const article = nodeByType(guideLd, 'Article');
+  check('מדריך: Article node present', Boolean(article));
+  check(
+    'מדריך: Article author is the one Person node',
+    article?.author?.['@id'] === NODE.person,
+  );
+  check('מדריך: Article is dated', Boolean(article?.datePublished && article?.dateModified));
+  check(
+    'מדריך: visible byline links to /אודות',
+    guide.includes(`href="${routeBySource('about.html').path}" rel="author"`),
+  );
+  check('מדריך: cites §160', guide.includes('160'));
+  check('מדריך: links the gov.il filing service', guide.includes('gov.il/he/service/itc135'));
+  check('מדריך: states the 6-year window', guide.includes('שש שנים'));
+  check('מדריך: discloses the debt risk', guide.includes('1.4%'));
+  check('אודות: ships no licence number while it is null', LICENCE_NUMBER !== null || !/רישיון[^<]{0,20}מס'/.test(about));
 }
 
 /* ================================================================

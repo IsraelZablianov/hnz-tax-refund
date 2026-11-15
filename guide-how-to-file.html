@@ -1,0 +1,207 @@
+<!doctype html>
+<!--
+  GUIDE — איך מבקשים החזר מס לשכירים
+
+  Answer-first by design: the lede and the first sentence of every section are
+  complete statements that stand alone, because that is what is quoted by
+  search snippets and AI assistants (docs/spec/07-seo.md, § AI search).
+
+  EVERY NUMBER here is either a statutory fact from docs/spec/02-constraints.md
+  (§160, 98%, 1.4%) or comes from refundWindow() through a build token. No
+  amounts, no promised outcome, no fee, no client results.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="theme-color" content="#30332f" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+
+    {{HEAD_ASSETS}}
+
+    <link rel="preload" href="/fonts/rubik-hebrew-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/doc.css" />
+
+    {{JSONLD}}
+  </head>
+
+  <body>
+    <a class="visually-hidden" href="#main">דלג לתוכן</a>
+
+    <header class="doc-head">
+      <div class="wrap doc-head__inner">
+        <a class="doc-head__brand" href="/">
+          <strong>הילה נח זבליאנוב</strong>
+          <span>רואת חשבון</span>
+        </a>
+        <nav class="breadcrumb" aria-label="מסלול ניווט">
+          <a href="/">דף הבית</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">איך מבקשים החזר מס</span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap doc__wrap">
+        <h1 class="doc__title">איך מבקשים החזר מס לשכירים</h1>
+
+        <p class="statement doc__lede">
+          שכיר יכול לבקש החזר מס על שש שנות מס אחורה, בהגשת דוח שנתי לרשות
+          המסים. בשנת <bdi>{{CURRENT_YEAR}}</bdi> פתוחות השנים
+          <bdi>{{OPEN_YEARS_FIRST}}-{{OPEN_YEARS_LAST}}</bdi>, ושנת המס
+          <bdi>{{EXPIRING_YEAR}}</bdi> נסגרת ב-<bdi>{{DEADLINE}}</bdi>.
+        </p>
+
+        <p class="doc__meta">
+          נכתב על ידי
+          <a href="{{ABOUT_HREF}}" rel="author">רו״ח הילה נח זבליאנוב</a>
+          · עודכן לאחרונה: {{LAST_UPDATED}}
+        </p>
+
+        <section class="doc__section" aria-labelledby="g-years">
+          <h2 id="g-years" class="doc__h2">אילו שנים עוד אפשר לתבוע</h2>
+          <p>
+            אפשר לבקש החזר עד שש שנים מתום שנת המס, לפי סעיף <bdi>160</bdi>
+            לפקודת מס הכנסה. התנאי הוא שהדוח לאותה שנה הוגש עד המועד, ולא
+            רק שנפתח תיק. שנת המס <bdi>{{EXPIRING_YEAR}}</bdi> נסגרת
+            ב-<bdi>{{DEADLINE}}</bdi>, וכל שנה אחריה נסגרת שנה אחר כך.
+          </p>
+          <p>
+            שש שנים הן המועד לעניין מס הכנסה. מספר אחר שמופיע לפעמים באינטרנט
+            שייך למערכת אחרת, הביטוח הלאומי, ואינו חל על החזר מס.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-who">
+          <h2 id="g-who" class="doc__h2">מתי בדרך כלל שולם יותר מדי מס</h2>
+          <p>
+            החזר מס מגיע כשבשנה מסוימת נוכה מהשכר יותר ממה שהחוק דורש. אלה
+            המצבים הנפוצים:
+          </p>
+          <ul class="doc__bullets">
+            <li>החלפת עבודה באמצע השנה.</li>
+            <li>שני מעסיקים במקביל.</li>
+            <li>תקופה בלי עבודה, חל״ת או דמי אבטלה.</li>
+            <li>לידה וחופשת לידה.</li>
+            <li>מילואים ותשלומים מהביטוח הלאומי.</li>
+            <li>סיום תואר או שחרור מצה״ל, שמזכים בנקודות זיכוי.</li>
+            <li>הפקדה עצמאית לקופת גמל או לביטוח חיים (סעיפים <bdi>45א</bdi> ו-<bdi>47</bdi>).</li>
+            <li>תרומה למוסד מוכר (סעיף <bdi>46</bdi>).</li>
+          </ul>
+          <p class="doc__note">
+            אין כאן אומדן סכום. גובה ההחזר, אם קיים, נקבע על ידי רשות המסים
+            בלבד, ורק אחרי שהיא מחשבת את כל ההכנסות של אותה שנה.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-docs">
+          <h2 id="g-docs" class="doc__h2">אילו מסמכים צריך להכין</h2>
+          <p>
+            המסמך המרכזי הוא טופס <bdi>106</bdi> מכל מעסיק, לכל שנה שרוצים
+            לבדוק. אפשר לקבל אותו מהמעסיק או להפיק מהאזור האישי באתר רשות
+            המסים.
+          </p>
+          <ul class="doc__bullets">
+            <li>אישורים על דמי אבטלה, דמי לידה או תגמולי מילואים, אם היו.</li>
+            <li>אישורי תרומה והפקדות עצמאיות לקופת גמל או לביטוח חיים, אם היו.</li>
+            <li>פרטי חשבון הבנק שאליו יוחזר הכסף.</li>
+          </ul>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-steps">
+          <h2 id="g-steps" class="doc__h2">איך מגישים, שלב אחר שלב</h2>
+          <ol class="doc__steps">
+            <li>
+              <strong>בודקים אילו שנים פתוחות.</strong>
+              השנים הפתוחות מופיעות בראש הדף. מתוכן שווה לבדוק את אלה שהיה בהן
+              אחד מהמצבים שלמעלה.
+            </li>
+            <li>
+              <strong>מנסים את סימולטור הזכאות.</strong>
+              רשות המסים מפעילה
+              <a href="https://www.gov.il/he/service/simulator-employee" rel="noopener">סימולטור בדיקת זכאות לשכירים</a>,
+              שנותן אינדיקציה ראשונית.
+            </li>
+            <li>
+              <strong>אוספים את המסמכים</strong> שברשימה למעלה, לכל שנה.
+            </li>
+            <li>
+              <strong>מגישים את הבקשה.</strong>
+              הגשה מקוונת בשירות
+              <a href="https://www.gov.il/he/service/itc135" rel="noopener">רשות המסים: בקשה להחזר מס (טופס <bdi>135</bdi>)</a>.
+            </li>
+            <li>
+              <strong>ממתינים לשומה.</strong>
+              רשות המסים מחשבת את השנה מחדש ושולחת את תוצאת החישוב.
+            </li>
+            <li>
+              <strong>ההחזר נכנס לחשבון הבנק,</strong>
+              בתוספת הצמדה וריבית.
+            </li>
+          </ol>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-risk">
+          <h2 id="g-risk" class="doc__h2">הסיכון שכדאי להכיר לפני שמגישים</h2>
+          <p>
+            בקשה להחזר מס היא דוח שנתי לכל דבר, והגשתה פותחת חישוב מחדש של כל
+            ההכנסות באותה שנה. לפי נתוני רשות המסים, בבקשות שהוגשו בעקבות
+            "המעטפות הירוקות" כ-<bdi>98%</bdi> הסתיימו בהחזר, ובכ-<bdi>1.4%</bdi>
+            התברר חוב.
+          </p>
+          <p>
+            לכן כדאי לחשב כל שנה לפני ההגשה, ולבחור להגיש רק את השנים
+            שהחישוב שלהן מראה החזר.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-who-files">
+          <h2 id="g-who-files" class="doc__h2">להגיש לבד או דרך רואת חשבון</h2>
+          <p>
+            אפשר להגיש לבד, ללא עלות, דרך רשות המסים, ובדף הזה יש את כל מה
+            שצריך כדי לעשות את זה.
+          </p>
+          <p>
+            מי שמעדיף שרואת חשבון תבדוק ותגיש בשבילו יכול לפנות אליי.
+            אני בודקת כל שנה בנפרד, מראה את התוצאה לפני ההגשה, ומגישה רק
+            אחרי שאישרת.
+            <a href="{{ABOUT_HREF}}">עוד על אופן העבודה</a>.
+          </p>
+          <p>
+            <a href="{{WA_HREF_FINAL}}" rel="noopener" data-surface="guide">שליחת הודעה בוואטסאפ</a>
+            או שיחה בטלפון
+            <a href="tel:{{PHONE_TEL}}" data-surface="guide"><bdi>{{PHONE_DISPLAY}}</bdi></a>.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-sources">
+          <h2 id="g-sources" class="doc__h2">מקורות</h2>
+          <ul class="doc__bullets">
+            <li>סעיף <bdi>160</bdi> לפקודת מס הכנסה: מועד הגשת בקשה להחזר.</li>
+            <li>
+              <a href="https://www.gov.il/he/service/itc135" rel="noopener">רשות המסים: בקשה להחזר מס (טופס <bdi>135</bdi>)</a>
+            </li>
+            <li>
+              <a href="https://www.gov.il/he/service/simulator-employee" rel="noopener">רשות המסים: סימולטור בדיקת זכאות לשכירים</a>
+            </li>
+            <li>
+              <a href="https://www.gov.il/he/service/tax-credit" rel="noopener">רשות המסים: מחשבון נקודות זיכוי</a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    {{PAGE_FOOTER}}
+  </body>
+</html>

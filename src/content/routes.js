@@ -39,7 +39,25 @@ export const ROUTES = [
   },
 
   // ---- Planned. Not in the sitemap until they are real documents. ----
-  { path: '/אודות/', shipped: false, priority: '0.8', changefreq: 'yearly' },
+  {
+    /** E-E-A-T keystone. ProfilePage + Person, see schema.js. */
+    path: '/אודות/',
+    source: 'about.html',
+    shipped: true,
+    // Stable biographical facts. Not year-derived, so no fake freshness.
+    lastmod: '2026-11-15',
+    priority: '0.8',
+    changefreq: 'yearly',
+  },
+  {
+    /** First guide. Year-derived (open years, deadline), so build-dated. */
+    path: '/מדריכים/איך-מגישים-בקשה-להחזר-מס/',
+    source: 'guide-how-to-file.html',
+    shipped: true,
+    lastmodFromBuild: true,
+    priority: '0.8',
+    changefreq: 'monthly',
+  },
   { path: '/בדיקת-זכאות-להחזר-מס/', shipped: false, priority: '0.9', changefreq: 'monthly' },
   { path: '/מדריכים/', shipped: false, priority: '0.7', changefreq: 'monthly' },
   { path: '/שירותים/', shipped: false, priority: '0.6', changefreq: 'yearly' },

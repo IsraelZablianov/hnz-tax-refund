@@ -109,6 +109,28 @@ function headMeta(page, w) {
         'ניתן לתבוע מס ששולם ביתר עד שש שנים אחורה. ' +
         `שנת המס ${w.expiringYear} נסגרת ב-${w.deadline}.`,
     },
+    about: {
+      title: `${NAME_HE}, ${TITLE_HE} | ${SERVICE_HE}`,
+      description:
+        `${NAME_HE}, ${TITLE_HE} מוסמכת משנת ${LICENSED_SINCE}, ${DEGREE_HE}, ${INSTITUTION_HE}. ` +
+        `מתמחה ב${SERVICE_HE}. איך עובדת הבדיקה, מי עושה אותה ואיך יוצרים קשר.`,
+      kind: 'profile',
+      trail: [
+        { name: 'דף הבית', path: '/' },
+        { name: 'אודות', path: route.path },
+      ],
+    },
+    'guide-how-to-file': {
+      title: 'איך מבקשים החזר מס לשכירים, שלב אחר שלב | רו״ח ' + NAME_HE,
+      description:
+        'איך מגישים בקשה להחזר מס לשכיר: אילו שנים פתוחות, אילו מסמכים צריך, ' +
+        `איך מגישים ברשות המסים ומה הסיכון. שנת המס ${w.expiringYear} נסגרת ב-${w.deadline}.`,
+      kind: 'article',
+      trail: [
+        { name: 'דף הבית', path: '/' },
+        { name: 'איך מבקשים החזר מס', path: route.path },
+      ],
+    },
     accessibility: {
       title: `${ACCESSIBILITY_TITLE_HE} | רו״ח ${NAME_HE}`,
       description:
@@ -194,7 +216,11 @@ function pageFooter({ lastUpdated, currentYear }) {
               <a href="tel:${PHONE_TEL}" data-surface="footer"><bdi>${PHONE_DISPLAY}</bdi></a><br />
               <a href="mailto:${EMAIL}" data-surface="footer"><bdi>${EMAIL}</bdi></a>
             </p>
-            <p class="doc-foot__label"><a href="/">לדף הבית</a></p>
+            <p class="doc-foot__label">
+              <a href="/">לדף הבית</a> ·
+              <a href="${routeBySource('about.html').path}">אודות</a> ·
+              <a href="${routeBySource('guide-how-to-file.html').path}">איך מבקשים החזר מס</a>
+            </p>
           </div>
           <div>
             <p>אזורי שירות: ${SERVICE_AREAS_HE.join(', ')} והסביבה. הטיפול כולו מרחוק.</p>
@@ -280,6 +306,8 @@ function injectContent() {
           '{{PHONE_DISPLAY}}': PHONE_DISPLAY,
           '{{EMAIL}}': EMAIL,
           '{{ACCESSIBILITY_HREF}}': accessibilityPath(),
+          '{{ABOUT_HREF}}': routeBySource('about.html').path,
+          '{{GUIDE_FILE_HREF}}': routeBySource('guide-how-to-file.html').path,
           '{{ACCESSIBILITY_TITLE}}': ACCESSIBILITY_TITLE_HE,
           '{{ACCESSIBILITY_REVIEWED}}': ACCESSIBILITY_REVIEWED,
           '{{ACCESSIBILITY_REVIEWED_HE}}': hebrewDate(ACCESSIBILITY_REVIEWED),

@@ -142,6 +142,14 @@ export const GA4_MEASUREMENT_ID = null;
  */
 export const SITE_PUBLISHED = '2026-10-17';
 
+/**
+ * First-publication date of the "how to file" guide, ISO-8601, for Article
+ * `datePublished`. Hardcoded for the same reason as SITE_PUBLISHED: it is a
+ * claim about one day, and deriving it from the build clock would re-date the
+ * article on every deploy.
+ */
+export const GUIDE_FILE_PUBLISHED = '2026-11-15';
+
 /** Accessibility statement. Legally required — תקן ת"י 5568. */
 export const ACCESSIBILITY_SLUG = 'נגישות';
 export const ACCESSIBILITY_TITLE_HE = 'הצהרת נגישות';
