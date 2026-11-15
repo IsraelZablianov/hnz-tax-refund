@@ -111,8 +111,15 @@ export const SERVICE_CLASS_HE = 'שירות נלווה';
  */
 export const AREA_SERVED_HE = [...SERVICE_AREAS_HE, 'גוש דן'];
 
-/** Social profiles, as a flat list for schema `sameAs`. */
-export const SAME_AS = Object.values(SOCIAL);
+/**
+ * Her general business card site. It is the website on the Google Business
+ * Profile and links here for the refund service. Not the canonical origin of
+ * this site (SITE_URL is), but the same entity, so it is a `sameAs`.
+ */
+export const CARD_SITE_URL = 'https://card.hnz-cpa.com/';
+
+/** Other profiles of the same entity, as a flat list for schema `sameAs`. */
+export const SAME_AS = [...Object.values(SOCIAL), CARD_SITE_URL];
 
 /** Open Graph card. Regenerate with public/og-image.html — see README. */
 export const OG_IMAGE_PATH = '/og-image.png';

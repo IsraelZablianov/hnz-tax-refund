@@ -19,7 +19,9 @@ Needs Hila's own Google account and verification, so it cannot be automated.
 - **Primary category:** `רואה חשבון` (Accountant). Do not add a tax-refund
   category as primary.
 - **Service areas:** חולון, בת ים, ראשון לציון, תל אביב-יפו, אזור.
-- **Phone:** 055-5582369 · **Website:** https://tax.hnz-cpa.com
+- **Phone:** 055-5582369 · **Website:** https://card.hnz-cpa.com (decided: the
+  card site is the one on Google; it links on to the tax site, see
+  `docs/card-site-brief.md`)
 - **Service:** `החזרי מס לשכירים (שירות נלווה)`. Keep the `שירות נלווה` label.
 - **Description (draft, 750 chars max):**
   `רואת חשבון מוסמכת משנת 2018, בוגרת תואר ראשון במנהל עסקים וראיית חשבון
