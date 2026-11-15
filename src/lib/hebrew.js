@@ -22,7 +22,9 @@ export function daysPhrase(days) {
  * "נותרו X" vs "נותר יום אחד" — the verb agrees with the number too.
  */
 export function remainingPhrase(days) {
-  if (days === 0) return 'היום היום האחרון';
+  // Used as a ledger cell ("זמן שנותר"), where "היום היום האחרון" read as a
+  // stutter.
+  if (days === 0) return 'היום האחרון';
   if (days === 1) return 'נותר יום אחד';
   return `נותרו ${daysPhrase(days)}`;
 }

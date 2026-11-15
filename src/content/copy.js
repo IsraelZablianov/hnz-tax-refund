@@ -68,7 +68,7 @@ export const PROCESS = [
   },
   {
     name: 'הגשה רק אחרי אישור',
-    detail: 'הדוח מוצג לפני השידור. אני לא משדרת שום דבר שלא ראיתם ואישרתם.',
+    detail: 'הדוח מוצג לך לפני השידור, ושום דבר לא משודר בלי האישור שלך.',
   },
   {
     name: 'הכסף נכנס',
@@ -94,15 +94,19 @@ export const PROCESS = [
  * Constraint: these are messages a real person sends about their own money. No
  * tracking codes, no bracketed tokens, nothing that reads as machine output —
  * a visible `[hero]` would undercut the one thing this site is selling.
+ *
+ * No slash gender forms (`שכיר/ה`) either. Nobody writes about themselves that
+ * way; it reads as a form letter. Hebrew first-person verbs and `לי` carry no
+ * gender, so the sentences are built around them instead.
  */
 
 /** Hero — the visitor acted early, on the deadline alone. */
 export const WA_MESSAGE =
-  'היי הילה, הגעתי מהאתר. אני שכיר/ה ואני רוצה לבדוק אם מגיע לי החזר מס 🙏';
+  'היי הילה, הגעתי מהאתר ורציתי לבדוק אם מגיע לי החזר מס 🙏';
 
 /** Sticky bar — mid-page, skimming. */
 export const WA_MESSAGE_STICKY =
-  'היי הילה, אני שכיר/ה ורוצה לבדוק אם מגיע לי החזר מס 🙏';
+  'היי הילה, אפשר לבדוק אם מגיע לי החזר מס? 🙏';
 
 /** Final CTA — read to the bottom, including the 1.4% section. Warmest. */
 export const WA_MESSAGE_FINAL =

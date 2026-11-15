@@ -95,12 +95,21 @@
     display: grid;
     grid-template-columns: 0.82fr 1fr;
     align-items: stretch;
-    min-height: 0;
-    height: min(88svh, 760px);
+    /* A floor, not a fixed height: when the copy needs more room the hero
+       grows. A fixed height plus overflow-y:auto on the body put a scrollbar
+       inside the hero as soon as one extra line was added. */
+    min-height: min(88svh, 760px);
   }
   .hero__media {
-    height: 100%;
+    height: auto;
+    min-height: 0;
     max-height: none;
+  }
+  /* Out of flow so the 1472px source does not set the row height; it fills
+     whatever height the copy column decides. */
+  .hero__portrait {
+    position: absolute;
+    inset: 0;
   }
   .hero__scrim {
     display: none;
@@ -113,7 +122,6 @@
     padding-block: clamp(2rem, 5vw, 4rem);
     padding-inline: var(--gutter) clamp(2rem, 5vw, 4.5rem);
     max-width: 40rem;
-    overflow-y: auto;
   }
 }
 
@@ -621,6 +629,17 @@
   margin-inline-start: 1.25rem;
   font-size: var(--fs-statement);
   text-decoration: none;
+}
+
+.final__later {
+  margin-top: 1.5rem;
+  font-size: var(--fs-small);
+  opacity: 0.85;
+}
+
+.final__later a {
+  color: inherit;
+  text-underline-offset: 0.2em;
 }
 
 .site-footer {

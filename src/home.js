@@ -11,9 +11,13 @@
  * must see the complete page — that is the whole point of the MPA decision.
  */
 
-import { refundWindow, ledgerBarWidths } from './lib/refundWindow.js';
-import { remainingPhrase } from './lib/hebrew.js';
-import { initAnalytics } from './lib/analytics.js';
+import { refundWindow } from './lib/refundWindow.js';
+import { counterHtml, ledgerRowsHtml } from './lib/render.js';
+import { reminderIcs, israeliToday } from './lib/reminder.js';
+import { NAME_HE, PHONE_WA } from './content/site.js';
+import { ORIGIN, ORIGIN_HOST } from './lib/urls.js';
+import { initAnalytics, track } from './lib/analytics.js';
+import { mountQuiz } from './islands/quiz.js';
 import { mountConsentBar } from './lib/consent.js';
 import './styles/tokens.css';
 import './styles/base.css';
@@ -29,61 +33,48 @@ import './styles/home.css';
    ------------------------------------------------------------------ */
 function correctStaleYearData() {
   const w = refundWindow();
-  const body = document.querySelector('[data-ledger-body]');
-  const renderedExpiring = document
-    .querySelector('.ledger__row--expiring .ledger__year bdi')
-    ?.textContent?.trim();
 
-  const isStale = renderedExpiring !== String(w.expiringYear);
-
-  // The counter changes daily, so always refresh it.
+  // The counter and the ledger both change DAILY, so both are always
+  // re-rendered from the visitor's own date. They come from the same functions
+  // the build uses (src/lib/render.js), so the two can never disagree. The
+  // ledger used to be refreshed only on a year rollover, which left a build
+  // from 17 October showing "75 days" under a hero counter that said 46.
   const counter = document.querySelector('[data-days-counter]');
-  if (counter) {
-    if (w.pastPracticalCutoff) {
-      // Past the practical cut-off, stop leading on a year that can no longer
-      // realistically be FILED in time. See refundWindow.js — this is a
-      // consumer-law point, not a UX nicety.
-      const rest = `${w.openYears[1]}–${w.openYears[w.openYears.length - 1]}`;
-      counter.innerHTML =
-        `הזמן להגשת <bdi>${w.expiringYear}</bdi> כבר קצר מאוד. ` +
-        `אפשר עדיין לבדוק את השנים <bdi>${rest}</bdi>.`;
-    } else {
-      counter.innerHTML =
-        `${remainingPhrase(w.daysLeft)} להגשת הדוח על שנת <bdi>${w.expiringYear}</bdi>`;
-    }
-  }
+  if (counter) counter.innerHTML = counterHtml(w);
 
-  if (!isStale || !body) return;
+  const body = document.querySelector('[data-ledger-body]');
+  if (body) body.innerHTML = ledgerRowsHtml(w);
 
-  // Whole-year rollover: rebuild the ledger and the surrounding year references.
-  body.innerHTML = ledgerBarWidths(w)
-    .map(
-      (row) => `
-    <tr class="ledger__row${row.isExpiring ? ' ledger__row--expiring' : ''}">
-      <th scope="row" class="ledger__year"><bdi>${row.taxYear}</bdi></th>
-      <td class="ledger__deadline"><bdi>${row.deadline}</bdi></td>
-      <td class="ledger__status">${
-        row.isExpiring
-          ? `<span class="ledger__expiring-label">נסגרת ב-<bdi>${w.deadline}</bdi></span>`
-          : 'פתוחה'
-      }</td>
-      <td class="ledger__bar-cell">
-        <span class="ledger__bar" style="--bar-width:${row.widthPercent}%" aria-hidden="true"></span>
-        <span class="ledger__days">${remainingPhrase(row.daysRemaining)}</span>
-      </td>
-    </tr>`,
-    )
-    .join('');
+  // Whole-year rollover: every other year reference on the page. These carry
+  // data attributes in index.html precisely so this can find them. The meta
+  // description and JSON-LD cannot be fixed from here, which is why the deploy
+  // also rebuilds daily.
+  const fill = (selector, value) =>
+    document.querySelectorAll(selector).forEach((el) => {
+      el.textContent = String(value);
+    });
+  fill('[data-closed-year]', w.lastClosedYear);
+  fill('[data-expiring-year]', w.expiringYear);
+  fill('[data-current-year]', w.currentYear);
+  fill('[data-deadline]', w.deadline);
+}
 
-  document.querySelectorAll('[data-closed-year]').forEach((el) => {
-    el.textContent = String(w.lastClosedYear);
+/* ------------------------------------------------------------------
+   Reminder link. The static /reminder.ics is dated build day + 7. If the
+   deploy is older than today (the daily rebuild failed or was disabled), a
+   reminder could land in the past, so regenerate it in the browser. Only
+   when stale: the static file is the path iOS Safari handles most reliably.
+   ------------------------------------------------------------------ */
+function correctStaleReminder() {
+  const link = document.querySelector('[data-reminder]');
+  if (!link || link.dataset.built === israeliToday()) return;
+  const ics = reminderIcs({
+    name: NAME_HE,
+    waUrl: `https://wa.me/${PHONE_WA}`,
+    siteUrl: ORIGIN,
+    host: ORIGIN_HOST,
   });
-  document.querySelectorAll('[data-expiring-year]').forEach((el) => {
-    el.textContent = String(w.expiringYear);
-  });
-  document.querySelectorAll('[data-deadline]').forEach((el) => {
-    el.textContent = w.deadline;
-  });
+  link.href = `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`;
 }
 
 /* ------------------------------------------------------------------
@@ -142,7 +133,13 @@ function wireReveal() {
 document.documentElement.classList.add('js');
 
 correctStaleYearData();
+correctStaleReminder();
 wireReveal();
+
+// The eligibility quiz. Replaces the no-JS WhatsApp fallback inside the
+// section. track() fails closed while GA4_MEASUREMENT_ID is null.
+const quizRoot = document.querySelector('[data-quiz]');
+if (quizRoot) mountQuiz(quizRoot, { track });
 
 /* ------------------------------------------------------------------
    Analytics and consent. Last, and deliberately so.

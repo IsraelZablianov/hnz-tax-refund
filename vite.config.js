@@ -3,11 +3,13 @@ import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, rename } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { refundWindow, ledgerBarWidths } from './src/lib/refundWindow.js';
-import { remainingPhrase, hebrewMonthYear } from './src/lib/hebrew.js';
+import { refundWindow } from './src/lib/refundWindow.js';
+import { hebrewMonthYear } from './src/lib/hebrew.js';
+import { ledgerRowsHtml, counterHtml } from './src/lib/render.js';
+import { reminderIcs, israeliToday } from './src/lib/reminder.js';
 import { pageSchema, schemaToScript } from './src/lib/schema.js';
 import { buildSitemap } from './src/lib/sitemap.js';
-import { absoluteUrl, ORIGIN_HOST, verifyCanonicalHost } from './src/lib/urls.js';
+import { absoluteUrl, ORIGIN, ORIGIN_HOST, verifyCanonicalHost } from './src/lib/urls.js';
 import { shippedRoutes, routeBySource } from './src/content/routes.js';
 import { TRIGGERS, PROCESS, WA_MESSAGE, WA_MESSAGES } from './src/content/copy.js';
 import {
@@ -50,21 +52,6 @@ import {
  * (a) corrects the date if the build is stale and (b) wires the scroll reveal.
  * A visitor with JS disabled, and every crawler, sees the complete page.
  */
-
-const ledgerRow = (row, deadline) => `
-        <tr class="ledger__row${row.isExpiring ? ' ledger__row--expiring' : ''}">
-          <th scope="row" class="ledger__year"><bdi>${row.taxYear}</bdi></th>
-          <td class="ledger__deadline"><bdi>${row.deadline}</bdi></td>
-          <td class="ledger__status">${
-            row.isExpiring
-              ? `<span class="ledger__expiring-label">נסגרת ב-<bdi>${deadline}</bdi></span>`
-              : 'פתוחה'
-          }</td>
-          <td class="ledger__bar-cell">
-            <span class="ledger__bar" style="--bar-width:${row.widthPercent}%" aria-hidden="true"></span>
-            <span class="ledger__days">${remainingPhrase(row.daysRemaining)}</span>
-          </td>
-        </tr>`;
 
 function buildCredentials() {
   const items = [`רואת חשבון מוסמכת משנת <bdi>${LICENSED_SINCE}</bdi>`];
@@ -207,7 +194,7 @@ function pageFooter({ lastUpdated, currentYear }) {
               <a href="tel:${PHONE_TEL}" data-surface="footer"><bdi>${PHONE_DISPLAY}</bdi></a><br />
               <a href="mailto:${EMAIL}" data-surface="footer"><bdi>${EMAIL}</bdi></a>
             </p>
-            <p class="doc-foot__label"><a href="/">דף הבית ←</a></p>
+            <p class="doc-foot__label"><a href="/">לדף הבית</a></p>
           </div>
           <div>
             <p>אזורי שירות: ${SERVICE_AREAS_HE.join(', ')} והסביבה. הטיפול כולו מרחוק.</p>
@@ -241,7 +228,6 @@ function injectContent() {
       order: 'pre',
       handler(html, ctx) {
         const w = refundWindow();
-        const bars = ledgerBarWidths(w);
         const waHref = `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(WA_MESSAGE)}`;
 
         /**
@@ -275,7 +261,9 @@ function injectContent() {
           '{{LAST_CLOSED_YEAR}}': String(w.lastClosedYear),
           '{{DEADLINE}}': w.deadline,
           '{{DAYS_LEFT}}': String(w.daysLeft),
-          '{{DAYS_REMAINING_PHRASE}}': remainingPhrase(w.daysLeft),
+          // Same renderer as the browser-side correction in home.js, so the
+          // static HTML and the corrected page can never disagree.
+          '{{COUNTER}}': counterHtml(w),
           '{{OPEN_YEARS_FIRST}}': String(w.openYears[0]),
           '{{OPEN_YEARS_LAST}}': String(w.openYears[w.openYears.length - 1]),
           '{{LAST_UPDATED}}': lastUpdated,
@@ -283,6 +271,9 @@ function injectContent() {
           '{{WA_HREF_HERO}}': waHrefFor('hero'),
           '{{WA_HREF_STICKY}}': waHrefFor('sticky'),
           '{{WA_HREF_FINAL}}': waHrefFor('final'),
+          '{{REMINDER_HREF}}': REMINDER_PATH,
+          // Lets home.js tell whether the static reminder file has gone stale.
+          '{{BUILD_DATE}}': israeliToday(),
 
           '{{SITE_HOST}}': ORIGIN_HOST,
           '{{PHONE_TEL}}': PHONE_TEL,
@@ -310,7 +301,7 @@ function injectContent() {
             currentYear: w.currentYear,
           }),
 
-          '{{LEDGER_ROWS}}': bars.map((r) => ledgerRow(r, w.deadline)).join(''),
+          '{{LEDGER_ROWS}}': ledgerRowsHtml(w),
 
           '{{TRIGGERS}}': TRIGGERS.map(
             (t) => `
@@ -453,6 +444,43 @@ function hebrewSlugsDevServer() {
 }
 
 /* ==================================================================
+   The "remind me in a week" calendar file.
+
+   Emitted at build time, dated build day + 7. The daily scheduled rebuild
+   keeps that close to the visitor's own date; if the deploy has gone stale,
+   home.js swaps in a freshly generated file instead.
+   ================================================================== */
+const REMINDER_PATH = '/reminder.ics';
+
+const reminderSource = () =>
+  reminderIcs({
+    name: NAME_HE,
+    waUrl: `https://wa.me/${PHONE_WA}`,
+    siteUrl: ORIGIN,
+    host: ORIGIN_HOST,
+  });
+
+function generateReminder() {
+  return {
+    name: 'hnz-reminder',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: REMINDER_PATH.slice(1),
+        source: reminderSource(),
+      });
+    },
+    // Serve it in `vite dev` too, so the link is never dead locally.
+    configureServer(server) {
+      server.middlewares.use(REMINDER_PATH, (_req, res) => {
+        res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+        res.end(reminderSource());
+      });
+    },
+  };
+}
+
+/* ==================================================================
    sitemap.xml — generated, never hand-maintained.
 
    The XML itself is built in src/lib/sitemap.js, which is a pure function of
@@ -547,6 +575,7 @@ export default defineConfig({
     hebrewSlugs(),
     hebrewSlugsDevServer(),
     generateSitemap(),
+    generateReminder(),
   ],
   build: {
     target: 'es2022',

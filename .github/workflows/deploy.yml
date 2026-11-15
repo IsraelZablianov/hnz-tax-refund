@@ -7,6 +7,13 @@ on:
   # The runtime script also corrects a stale build client-side, but a crawler
   # does not run JS — so the static HTML has to be right on its own.
   schedule:
+    # Daily, just after midnight in Israel (22:10 UTC is 00:10 in winter and
+    # 01:10 in summer). The day counter, the ledger, the meta description and
+    # the JSON-LD are all baked in at build time, and crawlers and no-JS
+    # visitors see only that. Rebuilding only on 1 January left the live
+    # ledger saying "75 days" a month later.
+    - cron: '10 22 * * *'
+    # Kept as a second chance for the rollover, the day that matters most.
     - cron: '5 0 1 1 *'
   workflow_dispatch:
 
@@ -14,6 +21,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # For the keepalive step below.
+  actions: write
 
 concurrency:
   group: pages
@@ -84,7 +93,7 @@ jobs:
 
           # SEO plumbing and brand assets.
           for f in robots.txt sitemap.xml favicon.svg favicon-32.png \
-                   apple-touch-icon.png og-image.png site.webmanifest; do
+                   apple-touch-icon.png og-image.png site.webmanifest reminder.ics; do
             [ -f "dist/$f" ] || fail "dist/$f missing"
           done
 
@@ -153,6 +162,16 @@ jobs:
           '
 
           echo "✓ build verified"
+
+      # GitHub disables scheduled workflows in a public repo after 60 days
+      # without a commit. This site can go months without one, which would
+      # silently stop the daily rebuild (and the 1 January one). Re-enabling
+      # the workflow through the API on every run resets that clock.
+      - name: Keep the schedule alive
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/deploy.yml/enable" || true
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

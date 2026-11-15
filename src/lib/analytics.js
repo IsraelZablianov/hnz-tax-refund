@@ -212,6 +212,9 @@ export function wireConversionEvents() {
         track('call_click', { surface });
       } else if (href.startsWith('mailto:')) {
         track('email_click', { surface });
+      } else if (link.hasAttribute('data-reminder')) {
+        // "Not now, remind me". Counts intent that a WhatsApp tap misses.
+        track('reminder_click', { surface });
       } else if (href.includes('gov.il')) {
         // The honest outbound link. Worth knowing how often it is taken —
         // if it is high, the honesty section is doing its job, not leaking.

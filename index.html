@@ -65,21 +65,22 @@
                cannot go stale in a search result, and a plain statement of law
                is clearly permitted where a dramatised countdown is not. -->
           <h1 class="hero__title">
-            שנת המס <bdi>{{EXPIRING_YEAR}}</bdi> נסגרת
-            <em>ב-31 בדצמבר <bdi>{{CURRENT_YEAR}}</bdi></em>
+            שנת המס <bdi data-expiring-year>{{EXPIRING_YEAR}}</bdi> נסגרת
+            <em>ב-31 בדצמבר <bdi data-current-year>{{CURRENT_YEAR}}</bdi></em>
           </h1>
 
+          <!-- Framed as the visitor's own money coming back, not as a gain:
+               people work harder to avoid losing what is theirs than to win
+               something new. See docs/behavioral-design.md. "וגם אם אין"
+               shows the honesty instead of asserting it with "בכנות". -->
           <p class="hero__sub">
-            החוק מאפשר לתבוע מס ששולם ביתר עד שש שנים אחורה. ב-<bdi>{{DEADLINE}}</bdi>
-            שנת המס <bdi>{{EXPIRING_YEAR}}</bdi> מתיישנת, ומה שלא נתבע עד אז לא
-            ייתבע לעולם. אני בודקת בעצמי את השנים הפתוחות שלך ואומרת לך בכנות אם
-            יש שם החזר.
+            אם שילמת יותר מס ממה שהיית צריך, ההפרש שייך לך, והחוק מאפשר לבקש
+            אותו בחזרה עד שש שנים אחורה. אני עוברת בעצמי על השנים הפתוחות שלך
+            ואומרת לך אם יש שם החזר, וגם אם אין.
           </p>
 
           <!-- Build-time value, corrected client-side if the build is stale. -->
-          <p class="hero__counter" data-days-counter>
-            {{DAYS_REMAINING_PHRASE}} להגשת הדוח על שנת <bdi>{{EXPIRING_YEAR}}</bdi>
-          </p>
+          <p class="hero__counter" data-days-counter>{{COUNTER}}</p>
 
           <div class="hero__actions">
             <!-- Names the job, then the channel. The previous label, "דברו איתי
@@ -92,7 +93,10 @@
                  leads, which matters for trust on a money question. -->
             <a class="btn btn--primary" href="{{WA_HREF_HERO}}" data-surface="hero" target="_blank" rel="noopener noreferrer">לבדיקת זכאות בוואטסאפ</a>
           </div>
-          <p class="cta-note">ללא התחייבות · אני עונה אישית, לא בוט</p>
+          <!-- The imagined paperwork is what stops most people. Removing it
+               from the first step is the cheapest conversion lever we have. -->
+          <p class="cta-note">ללא התחייבות · לא צריך להכין מסמכים מראש · אני עונה בעצמי</p>
+          <p class="cta-note"><a href="#bdika" data-surface="hero">או בדיקה ראשונית בשש שאלות, בלי להשאיר פרטים</a></p>
         </div>
       </section>
 
@@ -106,7 +110,8 @@
             <div>
               <p class="authority__figure"><bdi>3.6</bdi> מיליארד ₪</p>
               <p class="authority__label">
-                שנגבו ביתר משכירים בשנים <bdi>2013-2019</bdi>, לפי מבקר המדינה
+                שנגבו ביתר משכירים בשנים <bdi>2013-2019</bdi>, בכ-<bdi>2</bdi> מיליון
+                מקרים, לפי מבקר המדינה
               </p>
             </div>
             <div>
@@ -122,9 +127,9 @@
               </p>
             </div>
             <div>
-              <p class="authority__figure"><bdi>{{DEADLINE}}</bdi></p>
+              <p class="authority__figure"><bdi data-deadline>{{DEADLINE}}</bdi></p>
               <p class="authority__label">
-                המועד האחרון להגשת הדוח על שנת <bdi>{{EXPIRING_YEAR}}</bdi>
+                המועד האחרון להגשת הדוח על שנת <bdi data-expiring-year>{{EXPIRING_YEAR}}</bdi>
               </p>
             </div>
           </div>
@@ -196,6 +201,19 @@
         </div>
       </section>
 
+      <!-- ============ ELIGIBILITY QUIZ ============
+           Right after the triggers: the reader has just seen the situations,
+           so "which of these happened to you?" is the natural next step.
+           Inline section, never a modal (2(ב)(4)). Without JS the fallback
+           below is what renders; src/islands/quiz.js replaces it on mount.
+           Copy and compliance notes: src/content/quiz.js. -->
+      <section class="section" id="bdika" aria-label="בדיקה ראשונית">
+        <div class="wrap" data-quiz>
+          <h2 id="quiz-h" class="section__title">בדיקה ראשונית: יש אצלך סימנים להחזר?</h2>
+          <a class="btn btn--primary" href="{{WA_HREF_HERO}}" data-surface="quiz" target="_blank" rel="noopener noreferrer">לבדיקת זכאות בוואטסאפ</a>
+        </div>
+      </section>
+
       <!-- ============ PROCESS ============ -->
       <section class="section section--dark" aria-labelledby="how-h">
         <div class="wrap">
@@ -253,7 +271,8 @@
         <div class="wrap">
           <h2 id="privacy-h" class="section__title">מה קורה עם הפרטים שלך</h2>
           <ul class="details__list">
-            <li>באתר הזה אין טופס ואין מערכת שאוספת נתונים. הפנייה היא בוואטסאפ או בטלפון, ישירות אליי.</li>
+            <li>הבדיקה הראשונית באתר רצה רק בדפדפן שלך. התשובות לא נשמרות ולא נשלחות לשום מקום, אלא אם בחרת לשלוח אותן בוואטסאפ.</li>
+            <li>הפנייה היא בוואטסאפ או בטלפון, ישירות אליי.</li>
             <li><strong>אני לא מבקשת מספר כרטיס אשראי. אף פעם.</strong></li>
             <li>ייפוי הכוח נחתם ישירות מולי, לא דרך גורם שלישי.</li>
             <li>ההחזר מגיע מרשות המסים ישירות לחשבון הבנק שלך.</li>
@@ -270,15 +289,15 @@
               הילה נח זבליאנוב, רואת חשבון מוסמכת משנת <bdi>2018</bdi>, בוגרת
               תואר ראשון במנהל עסקים וראיית חשבון בקריה האקדמית אונו. אני מנהלת
               משרד עצמאי ומטפלת בדוחות מס ובליווי עצמאים דרך קבע. את הבדיקה שלך
-              אני עושה בעצמי, לא טופס אוטומטי ולא מוקד. אני בודקת, אני חותמת,
-              ואני זו שעונה אם רשות המסים תשאל שאלה בעוד שנתיים.
+              אני עושה בעצמי ואני גם חותמת על הדוח. אם בעוד שנתיים רשות המסים
+              תשאל עליו שאלה, אני זו שתענה.
             </p>
             <ul class="about__credentials">{{CREDENTIALS}}</ul>
           </div>
           <img
             class="about__portrait"
             src="/src/assets/hila-hero.png"
-            alt="הילה נח זבליאנוב במשרדה"
+            alt="הילה נח זבליאנוב"
             width="704"
             height="1472"
             loading="lazy"
@@ -303,6 +322,15 @@
           <a class="final__phone" href="tel:{{PHONE_TEL}}" data-surface="final">
             <bdi>{{PHONE_DISPLAY}}</bdi>
           </a>
+          <!-- For the visitor who agrees but not today. Most people who mean
+               to claim never do; a dated reminder they set themselves turns an
+               intention into an appointment. A plain link, not a prompt: it
+               never competes with the button above. The file is generated at
+               build time (src/lib/reminder.js). -->
+          <p class="final__later">
+            לא מתאים עכשיו?
+            <a href="{{REMINDER_HREF}}" download="tazkoret-hehzer-mas.ics" data-surface="final" data-reminder data-built="{{BUILD_DATE}}">אפשר לשים תזכורת ביומן לעוד שבוע</a>
+          </p>
         </div>
       </section>
     </main>
@@ -328,7 +356,7 @@
                  page, which on this site means the footer. The href is
                  injected because the Hebrew slug lives in site.js. -->
             <p class="site-footer__service-label">
-              <a href="{{ACCESSIBILITY_HREF}}">{{ACCESSIBILITY_TITLE}} ←</a>
+              <a href="{{ACCESSIBILITY_HREF}}">{{ACCESSIBILITY_TITLE}}</a>
             </p>
           </div>
           <div>
@@ -341,7 +369,7 @@
         <p class="site-footer__disclaimer">
           אין באמור באתר זה ייעוץ מס אישי, ואין בו הבטחה לקבלת החזר או לגובהו.
           גובה ההחזר, אם קיים, נקבע על ידי רשות המסים בלבד.<br />
-          עודכן לאחרונה: {{LAST_UPDATED}} · © {{CURRENT_YEAR}} הילה נח זבליאנוב
+          עודכן לאחרונה: {{LAST_UPDATED}} · © <span data-current-year>{{CURRENT_YEAR}}</span> הילה נח זבליאנוב
         </p>
       </div>
     </footer>

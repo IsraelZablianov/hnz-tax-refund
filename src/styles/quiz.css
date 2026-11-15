@@ -1,0 +1,204 @@
+/* Eligibility screening island. Imported by src/islands/quiz.js.
+   Logical properties only. Progress and selection use --accent; --signal is
+   reserved for expiry state and must not appear here. */
+
+.quiz {
+  max-inline-size: 40rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.quiz__title {
+  font-size: var(--fs-statement);
+  line-height: var(--lh-statement);
+  margin-block: 0 0.75rem;
+}
+
+.quiz__title:focus,
+.quiz__q:focus {
+  outline: none;
+}
+
+.quiz__sub,
+.quiz__body,
+.quiz__helper {
+  color: var(--text-muted);
+  margin-block: 0 1.25rem;
+}
+
+.quiz__progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 1.25rem;
+  font-size: var(--fs-micro);
+  color: var(--text-muted);
+}
+
+.quiz__bar {
+  flex: 1;
+  block-size: 3px;
+  background: var(--rule);
+}
+
+.quiz__fill {
+  display: block;
+  block-size: 100%;
+  background: var(--accent);
+  transition: inline-size var(--dur) var(--ease-out);
+}
+
+.quiz__step {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+}
+
+.quiz__q {
+  padding: 0;
+  font-size: var(--fs-statement);
+  line-height: var(--lh-statement);
+  font-weight: 600;
+  margin-block-end: 0.5rem;
+}
+
+.quiz__options {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-start: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .quiz__options--multi {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.quiz__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-block-size: 52px;
+  padding-inline: 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.quiz__option input {
+  accent-color: var(--accent);
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  flex: none;
+  margin: 0;
+}
+
+.quiz__option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+.quiz__option:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.quiz__option--none {
+  color: var(--text-muted);
+}
+
+@media (min-width: 40rem) {
+  .quiz__options--multi .quiz__option--none {
+    grid-column: 1 / -1;
+  }
+}
+
+.quiz__nav,
+.quiz__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-block-start: 1.5rem;
+}
+
+.quiz__nav .btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.quiz__back {
+  min-block-size: 44px;
+  padding-inline: 0.25rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.quiz__flags {
+  margin-block: 0 1rem;
+}
+
+.quiz__flags-lead {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.quiz__flags ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}
+
+.quiz__routing,
+.quiz__years,
+.quiz__disclaimer {
+  margin-block: 0 1rem;
+}
+
+.quiz__routing {
+  padding-inline-start: 0.75rem;
+  border-inline-start: 2px solid var(--rule-strong);
+}
+
+.quiz__years {
+  font-weight: 500;
+}
+
+/* Same type size as the body copy, per the spec rule that a disclaimer is
+   never smaller than the claim it qualifies. */
+.quiz__disclaimer {
+  color: var(--text-muted);
+}
+
+.quiz__note,
+.quiz__phone {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.quiz__phone a {
+  display: inline-block;
+  min-block-size: 44px;
+  line-height: 44px;
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz__fill,
+  .quiz__option {
+    transition: none;
+  }
+}
