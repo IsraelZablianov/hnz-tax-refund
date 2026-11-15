@@ -1,0 +1,139 @@
+.claude/skills/MARKETINGSKILLS-VERSION
+  s_95f7842f1b56fb::t_576633e0e96003 1
+.agents/product-marketing.md
+  s_95f7842f1b56fb::t_1067b1bfb97b85 1-100
+.claude/skills/MARKETINGSKILLS-LICENSE
+  s_95f7842f1b56fb::t_576633e0e96003 1-21
+.claude/skills/ab-testing/SKILL.md
+  s_95f7842f1b56fb::t_4aeb6b7dcb19f2 1-361
+.claude/skills/ab-testing/references/sample-size-guide.md
+  s_95f7842f1b56fb::t_4fdb1acd7868fb 1-278
+.claude/skills/ab-testing/references/test-templates.md
+  s_95f7842f1b56fb::t_af096f4ed04eab 1-277
+.claude/skills/ai-seo/SKILL.md
+  s_95f7842f1b56fb::t_db82bcfd0f0383 1-500
+.claude/skills/ai-seo/references/agent-defaults.md
+  s_95f7842f1b56fb::t_59333e376027f9 1-79
+.claude/skills/ai-seo/references/agent-readiness.md
+  s_95f7842f1b56fb::t_98f2c339f97725 1-116
+.claude/skills/ai-seo/references/ai-attribution.md
+  s_95f7842f1b56fb::t_eb7688ef73e88b 1-54
+.claude/skills/ai-seo/references/answer-accuracy.md
+  s_95f7842f1b56fb::t_f865ac47722e98 1-84
+.claude/skills/ai-seo/references/citations-vs-recommendations.md
+  s_95f7842f1b56fb::t_4258c982d895d2 1-120
+.claude/skills/ai-seo/references/content-patterns.md
+  s_95f7842f1b56fb::t_723c2a444cf469 1-311
+.claude/skills/ai-seo/references/content-types.md
+  s_95f7842f1b56fb::t_56710fa98c792d 1-82
+.claude/skills/ai-seo/references/format-volatility.md
+  s_95f7842f1b56fb::t_e64668942f9045 1-95
+.claude/skills/ai-seo/references/linkedin-ai-citations.md
+  s_95f7842f1b56fb::t_a6ff01a8dfe8e4 1-131
+.claude/skills/ai-seo/references/multilingual-and-commerce.md
+  s_95f7842f1b56fb::t_f9efa47a5c135f 1-55
+.claude/skills/ai-seo/references/okf.md
+  s_95f7842f1b56fb::t_1cd449f31a67fd 1-104
+.claude/skills/ai-seo/references/platform-ranking-factors.md
+  s_95f7842f1b56fb::t_7c6755c14a90a3 1-187
+.claude/skills/ai-seo/references/positioning-and-consensus.md
+  s_95f7842f1b56fb::t_dd03ba74d183c7 1-102
+.claude/skills/ai-seo/references/prompt-portfolio.md
+  s_95f7842f1b56fb::t_9a2e7948e3e386 1-97
+.claude/skills/ai-seo/references/youtube-ai-citations.md
+  s_95f7842f1b56fb::t_789b8aa29b5dca 1-66
+.claude/skills/analytics/SKILL.md
+  s_95f7842f1b56fb::t_bed623c63244f0 1-370
+.claude/skills/analytics/references/event-library.md
+  s_95f7842f1b56fb::t_a1e87e5c18bbdc 1-260
+.claude/skills/analytics/references/ga4-implementation.md
+  s_95f7842f1b56fb::t_ae14351061ce43 1-304
+.claude/skills/analytics/references/gtm-implementation.md
+  s_95f7842f1b56fb::t_3de7c4bd4d40ae 1-396
+.claude/skills/content-strategy/SKILL.md
+  s_95f7842f1b56fb::t_3dde97871f0aba 1-444
+.claude/skills/content-strategy/references/content-distribution.md
+  s_95f7842f1b56fb::t_975e70c33509d2 1-83
+.claude/skills/content-strategy/references/headless-cms.md
+  s_95f7842f1b56fb::t_4fa86cdf0bbc05 1-194
+.claude/skills/copy-editing/SKILL.md
+  s_95f7842f1b56fb::t_d455c24bb23536 1-491
+.claude/skills/copy-editing/references/checklist.md
+  s_95f7842f1b56fb::t_3632cc26ed19a4 1-101
+.claude/skills/copy-editing/references/content-refresh.md
+  s_95f7842f1b56fb::t_e93e9284a9de1c 1-71
+.claude/skills/copy-editing/references/plain-english-alternatives.md
+  s_95f7842f1b56fb::t_e64116c3a10772 1-394
+.claude/skills/copywriting/SKILL.md
+  s_95f7842f1b56fb::t_7714bad83d1f1f 1-339
+.claude/skills/copywriting/references/ai-tells.md
+  s_95f7842f1b56fb::t_306af364ececbf 1-309
+.claude/skills/copywriting/references/copy-frameworks.md
+  s_95f7842f1b56fb::t_31b7933a09a011 1-432
+.claude/skills/copywriting/references/natural-transitions.md
+  s_95f7842f1b56fb::t_8e0a1ae97d8beb 1-256
+.claude/skills/cro/SKILL.md
+  s_95f7842f1b56fb::t_0b428886b70df5 1-198
+.claude/skills/cro/references/experiments.md
+  s_95f7842f1b56fb::t_cc5c5bbbf66333 1-248
+.claude/skills/cro/references/form.md
+  s_95f7842f1b56fb::t_ee1b9e2df658b9 1-422
+.claude/skills/customer-research/SKILL.md
+  s_95f7842f1b56fb::t_8a8093c83b2920 1-308
+.claude/skills/customer-research/references/interviews-and-surveys.md
+  s_95f7842f1b56fb::t_b85d91fb70ef73 1-155
+.claude/skills/customer-research/references/source-guides.md
+  s_95f7842f1b56fb::t_3dc48a68e2c295 1-401
+.claude/skills/marketing-psychology/SKILL.md
+  s_95f7842f1b56fb::t_a7b669778ae8d3 1-455
+.claude/skills/product-marketing/SKILL.md
+  s_95f7842f1b56fb::t_5a16a840235896 1-320
+.claude/skills/product-marketing/references/brand-voice.md
+  s_95f7842f1b56fb::t_4bbb3f4b1674f8 1-103
+.claude/skills/schema/SKILL.md
+  s_95f7842f1b56fb::t_9bc1afdf700270 1-191
+.claude/skills/schema/references/schema-examples.md
+  s_95f7842f1b56fb::t_c5cb6eb46a1888 1-392
+.claude/skills/seo-audit/SKILL.md
+  s_95f7842f1b56fb::t_22b52cfa420f28 1-497
+.claude/skills/seo-audit/references/ai-writing-detection.md
+  s_95f7842f1b56fb::t_2d126d21c7a534 1-200
+.claude/skills/seo-audit/references/international-seo.md
+  s_95f7842f1b56fb::t_ac8470e2735654 1-230
+.claude/skills/seo-audit/references/local-seo-pages-and-measurement.md
+  s_95f7842f1b56fb::t_294408ede4d488 1-39
+.claude/skills/seo-audit/references/local-seo-profile-and-citations.md
+  s_95f7842f1b56fb::t_2e7c46bbf2f94f 1-41
+.claude/skills/seo-audit/references/local-seo.md
+  s_95f7842f1b56fb::t_2f8a90481cab4d 1-86
+.claude/skills/seo-audit/references/rankings-push.md
+  s_95f7842f1b56fb::t_45be7b609f8f60 1-62
+.claude/skills/seo-audit/references/title-tags.md
+  s_95f7842f1b56fb::t_4828e9e6add44f 1-89
+.claude/skills/site-architecture/SKILL.md
+  s_95f7842f1b56fb::t_ab10487410f0c9 1-359
+.claude/skills/site-architecture/references/mermaid-templates.md
+  s_95f7842f1b56fb::t_9634eedab25de7 1-216
+.claude/skills/site-architecture/references/navigation-patterns.md
+  s_95f7842f1b56fb::t_3642a2811a5704 1-305
+.claude/skills/site-architecture/references/platforms-and-migration.md
+  s_95f7842f1b56fb::t_07fc9f8ae7924f 1-86
+.claude/skills/site-architecture/references/site-type-templates.md
+  s_95f7842f1b56fb::t_6115f99e255625 1-293
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "518fa618f5eb73cbe15304c0b1b5e16588867d3b",
+  "prompts": {},
+  "sessions": {
+    "s_95f7842f1b56fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78acd3bf-fedc-44d5-802d-cf53d38290b7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Israel Zablianov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
