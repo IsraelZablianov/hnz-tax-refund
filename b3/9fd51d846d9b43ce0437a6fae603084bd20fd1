@@ -1,0 +1,23 @@
+guide-form-106.html
+  s_f043e4cf4facb4::t_576e7607c7aad3 66-71
+guide-self-or-cpa.html
+  s_f043e4cf4facb4::t_576e7607c7aad3 68-73
+guide-how-to-file.html
+  s_f043e4cf4facb4::t_576e7607c7aad3 71-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b39fd51d846d9b43ce0437a6fae603084bd20fd1",
+  "prompts": {},
+  "sessions": {
+    "s_f043e4cf4facb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb682948-a352-4ff2-98c2-12b1db6761cc",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Israel Zablianov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
