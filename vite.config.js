@@ -10,7 +10,7 @@ import { reminderIcs, israeliToday } from './src/lib/reminder.js';
 import { pageSchema, schemaToScript } from './src/lib/schema.js';
 import { buildSitemap } from './src/lib/sitemap.js';
 import { absoluteUrl, ORIGIN, ORIGIN_HOST, verifyCanonicalHost } from './src/lib/urls.js';
-import { shippedRoutes, routeBySource } from './src/content/routes.js';
+import { shippedRoutes, routeBySource, GUIDES } from './src/content/routes.js';
 import { TRIGGERS, PROCESS, WA_MESSAGE, WA_MESSAGES } from './src/content/copy.js';
 import {
   PHONE_WA,
@@ -33,6 +33,9 @@ import {
   OG_IMAGE_HEIGHT,
   ACCESSIBILITY_TITLE_HE,
   ACCESSIBILITY_REVIEWED,
+  GUIDE_FILE_PUBLISHED,
+  GUIDE_106_PUBLISHED,
+  GUIDE_SELF_OR_CPA_PUBLISHED,
 } from './src/content/site.js';
 
 /**
@@ -126,9 +129,34 @@ function headMeta(page, w) {
         'איך מגישים בקשה להחזר מס לשכיר: אילו שנים פתוחות, אילו מסמכים צריך, ' +
         `איך מגישים ברשות המסים ומה הסיכון. שנת המס ${w.expiringYear} נסגרת ב-${w.deadline}.`,
       kind: 'article',
+      published: GUIDE_FILE_PUBLISHED,
       trail: [
         { name: 'דף הבית', path: '/' },
         { name: 'איך מבקשים החזר מס', path: route.path },
+      ],
+    },
+    'guide-form-106': {
+      title: 'מה זה טופס 106 ואיך משיגים אותו | רו״ח ' + NAME_HE,
+      description:
+        'טופס 106 הוא האישור השנתי של המעסיק על שכר, מס שנוכה ונקודות זיכוי. ' +
+        'מה כתוב בו, איפה משיגים אותו ומה כדאי לבדוק בו לפני בקשה להחזר מס.',
+      kind: 'article',
+      published: GUIDE_106_PUBLISHED,
+      trail: [
+        { name: 'דף הבית', path: '/' },
+        { name: 'מה זה טופס 106', path: route.path },
+      ],
+    },
+    'guide-self-or-cpa': {
+      title: 'החזר מס: להגיש לבד או דרך רואת חשבון | רו״ח ' + NAME_HE,
+      description:
+        'אפשר להגיש בקשה להחזר מס לבד, ללא עלות, דרך רשות המסים. ' +
+        'מתי כדאי לשקול עזרה, ואילו שאלות כדאי לשאול כל מי שמטפל בזה בשבילך.',
+      kind: 'article',
+      published: GUIDE_SELF_OR_CPA_PUBLISHED,
+      trail: [
+        { name: 'דף הבית', path: '/' },
+        { name: 'לבד או דרך רואת חשבון', path: route.path },
       ],
     },
     accessibility: {
@@ -219,7 +247,9 @@ function pageFooter({ lastUpdated, currentYear }) {
             <p class="doc-foot__label">
               <a href="/">לדף הבית</a> ·
               <a href="${routeBySource('about.html').path}">אודות</a> ·
-              <a href="${routeBySource('guide-how-to-file.html').path}">איך מבקשים החזר מס</a>
+              ${GUIDES.map(
+                (g) => `<a href="${routeBySource(g.source).path}">${g.label}</a>`,
+              ).join(' · ')}
             </p>
           </div>
           <div>
@@ -308,6 +338,14 @@ function injectContent() {
           '{{ACCESSIBILITY_HREF}}': accessibilityPath(),
           '{{ABOUT_HREF}}': routeBySource('about.html').path,
           '{{GUIDE_FILE_HREF}}': routeBySource('guide-how-to-file.html').path,
+          '{{GUIDE_106_HREF}}': routeBySource('guide-form-106.html').path,
+          '{{GUIDE_SELF_HREF}}': routeBySource('guide-self-or-cpa.html').path,
+          // "More guides" list: every guide except the one being rendered.
+          '{{GUIDE_LINKS}}': `<ul class="doc__bullets">${GUIDES.filter(
+            (g) => g.source !== `${page}.html`,
+          )
+            .map((g) => `<li><a href="${routeBySource(g.source).path}">${g.label}</a></li>`)
+            .join('')}</ul>`,
           '{{ACCESSIBILITY_TITLE}}': ACCESSIBILITY_TITLE_HE,
           '{{ACCESSIBILITY_REVIEWED}}': ACCESSIBILITY_REVIEWED,
           '{{ACCESSIBILITY_REVIEWED_HE}}': hebrewDate(ACCESSIBILITY_REVIEWED),

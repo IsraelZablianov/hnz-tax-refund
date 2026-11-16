@@ -115,6 +115,11 @@ jobs:
           [ -f 'dist/מדריכים/איך-מגישים-בקשה-להחזר-מס/index.html' ] \
             || fail "How-to-file guide missing at the Hebrew slug"
 
+          [ -f 'dist/מדריכים/טופס-106/index.html' ] \
+            || fail "Form 106 guide missing at the Hebrew slug"
+          [ -f 'dist/מדריכים/לבד-או-דרך-רואת-חשבון/index.html' ] \
+            || fail "Self-or-CPA guide missing at the Hebrew slug"
+
           grep -q 'application/ld+json' dist/index.html \
             || fail "JSON-LD missing from the homepage"
 

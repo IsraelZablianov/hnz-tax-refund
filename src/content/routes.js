@@ -64,6 +64,24 @@ export const ROUTES = [
   { path: '/צור-קשר/', shipped: false, priority: '0.6', changefreq: 'yearly' },
 
   {
+    path: '/מדריכים/טופס-106/',
+    source: 'guide-form-106.html',
+    shipped: true,
+    // Stable explainer, not year-derived: no fake freshness.
+    lastmod: '2026-11-16',
+    priority: '0.7',
+    changefreq: 'yearly',
+  },
+  {
+    path: '/מדריכים/לבד-או-דרך-רואת-חשבון/',
+    source: 'guide-self-or-cpa.html',
+    shipped: true,
+    lastmod: '2026-11-16',
+    priority: '0.7',
+    changefreq: 'yearly',
+  },
+
+  {
     /**
      * Accessibility statement. Legally required on an Israeli commercial site
      * under תקנות שוויון זכויות לאנשים עם מוגבלות and תקן ת"י 5568, so it is
@@ -84,6 +102,16 @@ export const ROUTES = [
     priority: '0.3',
     changefreq: 'yearly',
   },
+];
+
+/**
+ * The guides, in display order. Drives the footer links and the "more guides"
+ * list on each guide, so a new guide is declared here and nowhere else.
+ */
+export const GUIDES = [
+  { source: 'guide-how-to-file.html', label: 'איך מבקשים החזר מס' },
+  { source: 'guide-form-106.html', label: 'מה זה טופס 106' },
+  { source: 'guide-self-or-cpa.html', label: 'לבד או דרך רואת חשבון' },
 ];
 
 /** Routes that are actually served — the only ones a sitemap may contain. */

@@ -40,6 +40,8 @@ const outFile = (source) =>
   `${routeBySource(source).path.replace(/^\/|\/$/g, '')}/index.html`;
 const ABOUT_FILE = outFile('about.html');
 const GUIDE_FILE = outFile('guide-how-to-file.html');
+const GUIDE_106_FILE = outFile('guide-form-106.html');
+const GUIDE_SELF_FILE = outFile('guide-self-or-cpa.html');
 
 const failures = [];
 const checks = [];
@@ -304,6 +306,8 @@ for (const [file, label] of [
   [A11Y_FILE, 'נגישות/index.html'],
   [ABOUT_FILE, 'אודות/index.html'],
   [GUIDE_FILE, 'מדריך: איך מבקשים החזר מס'],
+  [GUIDE_106_FILE, 'מדריך: טופס 106'],
+  [GUIDE_SELF_FILE, 'מדריך: לבד או דרך רואת חשבון'],
 ]) {
   const html = read(file);
 
@@ -363,6 +367,19 @@ for (const [file, label] of [
   check('מדריך: links the gov.il filing service', guide.includes('gov.il/he/service/itc135'));
   check('מדריך: states the 6-year window', guide.includes('שש שנים'));
   check('מדריך: discloses the debt risk', guide.includes('1.4%'));
+  // Every guide: an Article by the one Person, dated, with a visible byline.
+  for (const [file, label] of [
+    [GUIDE_106_FILE, 'מדריך 106'],
+    [GUIDE_SELF_FILE, 'מדריך לבד או דרך רו״ח'],
+  ]) {
+    const ld = parseJsonLd(file, label);
+    const art = nodeByType(ld, 'Article');
+    const html = read(file);
+    check(`${label}: Article by the one Person node`, art?.author?.['@id'] === NODE.person);
+    check(`${label}: Article is dated`, Boolean(art?.datePublished && art?.dateModified));
+    check(`${label}: byline links to /אודות`, html.includes('rel="author"'));
+    check(`${label}: links to other guides`, html.includes('מדריכים נוספים'));
+  }
   check('אודות: ships no licence number while it is null', LICENCE_NUMBER !== null || !/רישיון[^<]{0,20}מס'/.test(about));
 }
 

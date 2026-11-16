@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+  GUIDE — להגיש לבד או דרך רואת חשבון
+
+  The honest-alternative page (docs/spec/07-seo.md, E-E-A-T point 10).
+
+  COPY RULES: no comparison with other providers, no fee, no result, no
+  superlative. The checklist of questions is neutral and applies to anyone
+  who handles a refund claim, including the author of this site.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="theme-color" content="#30332f" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+
+    {{HEAD_ASSETS}}
+
+    <link rel="preload" href="/fonts/rubik-hebrew-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/doc.css" />
+
+    {{JSONLD}}
+  </head>
+
+  <body>
+    <a class="visually-hidden" href="#main">דלג לתוכן</a>
+
+    <header class="doc-head">
+      <div class="wrap doc-head__inner">
+        <a class="doc-head__brand" href="/">
+          <strong>הילה נח זבליאנוב</strong>
+          <span>רואת חשבון</span>
+        </a>
+        <nav class="breadcrumb" aria-label="מסלול ניווט">
+          <a href="/">דף הבית</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">לבד או דרך רואת חשבון</span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap doc__wrap">
+        <h1 class="doc__title">החזר מס: להגיש לבד או דרך רואת חשבון</h1>
+
+        <p class="statement doc__lede">
+          אפשר להגיש בקשה להחזר מס בעצמך, ללא עלות, דרך רשות המסים. עזרה
+          של רואת חשבון רלוונטית בעיקר כשיש כמה מעסיקים, כמה שנים פתוחות או
+          מצבים שקשה לחשב לבד.
+        </p>
+
+        <p class="doc__meta">
+          נכתב על ידי
+          <a href="{{ABOUT_HREF}}" rel="author">רו״ח הילה נח זבליאנוב</a>
+          · עודכן לאחרונה: {{LAST_UPDATED}}
+        </p>
+
+        <section class="doc__section" aria-labelledby="s-alone">
+          <h2 id="s-alone" class="doc__h2">מה כרוך בהגשה עצמית</h2>
+          <p>
+            צריך לאסוף טופס <bdi>106</bdi> מכל מעסיק לכל שנה, לוודא אילו שנים
+            פתוחות, ולהגיש את הבקשה בשירות המקוון של רשות המסים. כל שנה
+            מחושבת בנפרד, וכל מה שצריך לדעת מפורט ב<a
+              href="{{GUIDE_FILE_HREF}}"
+              >מדריך איך מבקשים החזר מס</a
+            >.
+          </p>
+          <p>
+            רשות המסים מפעילה גם
+            <a href="https://www.gov.il/he/service/simulator-employee" rel="noopener">סימולטור בדיקת זכאות לשכירים</a>
+            שאפשר להתחיל בו.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="s-help">
+          <h2 id="s-help" class="doc__h2">מתי כדאי לשקול עזרה</h2>
+          <ul class="doc__bullets">
+            <li>כמה שנים פתוחות, עם מעסיקים שונים בכל אחת.</li>
+            <li>שני מעסיקים במקביל באותה שנה.</li>
+            <li>הפקדות עצמאיות לקופת גמל או לביטוח חיים, או תרומות.</li>
+            <li>פיצויי פיטורים או משיכת כספי פנסיה.</li>
+            <li>חוסר ודאות אם כדאי להגיש שנה מסוימת, כי הגשה פותחת חישוב מחדש של כל ההכנסות באותה שנה.</li>
+          </ul>
+          <p class="doc__note">
+            לפי נתוני רשות המסים, בבקשות שהוגשו בעקבות "המעטפות הירוקות"
+            כ-<bdi>98%</bdi> הסתיימו בהחזר, ובכ-<bdi>1.4%</bdi> התברר חוב.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="s-ask">
+          <h2 id="s-ask" class="doc__h2">מה כדאי לשאול לפני שמוסרים מסמכים</h2>
+          <p>
+            השאלות האלה מתאימות לכל מי שמטפל בבקשה להחזר מס בשבילך:
+          </p>
+          <ul class="doc__bullets">
+            <li>מי בדיוק בודק את התיק, ומי חותם על הדוח.</li>
+            <li>האם תראה את התוצאה לכל שנה לפני שמוגש משהו.</li>
+            <li>מה קורה אם בחישוב יוצא חוב ולא החזר.</li>
+            <li>איך ומתי משלמים, ושההסדר כתוב לפני שמתחילים.</li>
+            <li>למה נדרש ייפוי כוח, ומה הוא מאפשר.</li>
+            <li>האם מבקשים מספר כרטיס אשראי, ולמה.</li>
+          </ul>
+          <p>
+            אפשר לשאול אותי את אותן שאלות. כך אני עובדת, בקצרה, ב<a
+              href="{{ABOUT_HREF}}"
+              >עמוד אודות</a
+            >.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="s-contact">
+          <h2 id="s-contact" class="doc__h2">אם בא לך לבדוק איתי</h2>
+          <p>
+            שנת המס <bdi>{{EXPIRING_YEAR}}</bdi> נסגרת ב-<bdi>{{DEADLINE}}</bdi>.
+            אפשר לכתוב לי בוואטסאפ או להתקשר, ונבדוק יחד אילו שנים פתוחות
+            אצלך.
+          </p>
+          <p>
+            <a href="{{WA_HREF_FINAL}}" rel="noopener" data-surface="guide">שליחת הודעה בוואטסאפ</a>
+            או שיחה בטלפון
+            <a href="tel:{{PHONE_TEL}}" data-surface="guide"><bdi>{{PHONE_DISPLAY}}</bdi></a>.
+          </p>
+        </section>
+
+        <section class="doc__section" aria-labelledby="g-more">
+          <h2 id="g-more" class="doc__h2">מדריכים נוספים</h2>
+          {{GUIDE_LINKS}}
+        </section>
+      </div>
+    </main>
+
+    {{PAGE_FOOTER}}
+  </body>
+</html>

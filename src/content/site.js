@@ -156,6 +156,8 @@ export const SITE_PUBLISHED = '2026-10-17';
  * article on every deploy.
  */
 export const GUIDE_FILE_PUBLISHED = '2026-11-15';
+export const GUIDE_106_PUBLISHED = '2026-11-16';
+export const GUIDE_SELF_OR_CPA_PUBLISHED = '2026-11-16';
 
 /** Accessibility statement. Legally required — תקן ת"י 5568. */
 export const ACCESSIBILITY_SLUG = 'נגישות';

@@ -55,7 +55,6 @@ import {
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
   SITE_PUBLISHED,
-  GUIDE_FILE_PUBLISHED,
   LICENCE_REGISTER_URL,
 } from '../content/site.js';
 import { absoluteUrl, ORIGIN } from './urls.js';
@@ -311,6 +310,7 @@ function breadcrumbNode({ path, trail }) {
  * @param {string}   page.description  must match the meta description
  * @param {Array}    [page.trail]      breadcrumb trail, omit on the homepage
  * @param {string}   [page.kind]       'profile' | 'article'; default plain WebPage
+ * @param {string}   [page.published]  ISO date, required for kind 'article'
  * @param {Date}     [page.now]        injectable for deterministic tests
  */
 export function pageSchema({
@@ -319,6 +319,7 @@ export function pageSchema({
   description,
   trail,
   kind,
+  published,
   now = new Date(),
 }) {
   const buildDate = now.toISOString().slice(0, 10);
@@ -346,7 +347,7 @@ export function pageSchema({
         title,
         description,
         buildDate,
-        published: GUIDE_FILE_PUBLISHED,
+        published,
       }),
     );
   }
