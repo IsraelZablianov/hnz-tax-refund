@@ -1,0 +1,28 @@
+guide-how-to-file.html
+  s_f043e4cf4facb4::t_cfa21350793081 195-196
+  s_f043e4cf4facb4::t_eef6ae3bfdfe6e 86-89,122-125,128-132,134-138,165-166,221-222
+  s_f043e4cf4facb4::t_4b3f76939413d4 85,223
+about.html
+  s_f043e4cf4facb4::t_cfa21350793081 86
+vite.config.js
+  s_f043e4cf4facb4::t_4a287458ff9dbe 485-489,498,512-513
+  s_f043e4cf4facb4::t_cfa21350793081 394
+guide-form-106.html
+  s_f043e4cf4facb4::t_eef6ae3bfdfe6e 78-81,90-92,96-97,107,111-112,134-139
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "13f37b4386132ae3599d1ecd2be92cd85eb13af9",
+  "prompts": {},
+  "sessions": {
+    "s_f043e4cf4facb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb682948-a352-4ff2-98c2-12b1db6761cc",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Israel Zablianov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
