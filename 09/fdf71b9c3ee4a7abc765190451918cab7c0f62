@@ -1,0 +1,39 @@
+src/content/routes.js
+  s_f043e4cf4facb4::t_13d6b824e19781 66-83,107-114
+  s_f043e4cf4facb4::t_003e1688d98fac 115-116
+src/content/site.js
+  s_f043e4cf4facb4::t_13d6b824e19781 159-160
+guide-form-106.html
+  s_f043e4cf4facb4::t_a4fdf44a9d253c 1-143
+scripts/verify-dist.mjs
+  s_f043e4cf4facb4::t_6e8e0252ff7dd2 43-44,309-310,370-382
+.github/workflows/deploy.yml
+  s_f043e4cf4facb4::t_6e8e0252ff7dd2 118-122
+guide-self-or-cpa.html
+  s_f043e4cf4facb4::t_a4fdf44a9d253c 1-144
+src/lib/schema.js
+  s_f043e4cf4facb4::t_13d6b824e19781 313,322,350
+index.html
+  s_f043e4cf4facb4::t_13d6b824e19781 353-355
+guide-how-to-file.html
+  s_f043e4cf4facb4::t_6e8e0252ff7dd2 110-111,170-172,205-208
+  s_f043e4cf4facb4::t_d7a318d9043721 209
+vite.config.js
+  s_f043e4cf4facb4::t_13d6b824e19781 13,36-38,132,138-161,250-252,341-348
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "09fdf71b9c3ee4a7abc765190451918cab7c0f62",
+  "prompts": {},
+  "sessions": {
+    "s_f043e4cf4facb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb682948-a352-4ff2-98c2-12b1db6761cc",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Israel Zablianov <izablianov@paloaltonetworks.com>"
+    }
+  }
+}
