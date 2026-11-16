@@ -391,6 +391,7 @@ function injectContent() {
             ? `רישיון מס' <bdi>${LICENCE_NUMBER}</bdi>`
             : `רואת חשבון מוסמכת משנת <bdi>${LICENSED_SINCE}</bdi>`,
 
+          '{{SERVICE_AREAS_LIST}}': `${SERVICE_AREAS_HE.join(', ')} והסביבה. הטיפול כולו מרחוק.`,
           '{{SERVICE_AREAS}}':
             `אזורי שירות: ${SERVICE_AREAS_HE.join(', ')} והסביבה. הטיפול כולו מרחוק.`,
         };
@@ -481,7 +482,11 @@ function hebrewSlugs() {
  * dev server still resolves and transforms the ASCII source file.
  */
 function hebrewSlugsDevServer() {
-  const rewrite = (server) => {
+  // `vite dev` serves the ASCII SOURCE file; `vite preview` serves dist/, where
+  // hebrewSlugs() has already moved it to <slug>/index.html. Rewriting preview
+  // requests to the source name 404s and falls back to the homepage, so each
+  // mode gets its own target.
+  const rewrite = (preview) => (server) => {
     server.middlewares.use((req, _res, next) => {
       try {
         // Both forms: percent-encoded, and the raw UTF-8 a user pastes.
@@ -490,7 +495,7 @@ function hebrewSlugsDevServer() {
         for (const [from, to] of Object.entries(slugMap())) {
           const slug = `/${to.replace(/\/index\.html$/, '')}`;
           if (decoded === slug || decoded === `${slug}/`) {
-            req.url = `/${from}`;
+            req.url = preview ? encodeURI(`/${to}`) : `/${from}`;
             break;
           }
         }
@@ -504,8 +509,8 @@ function hebrewSlugsDevServer() {
   return {
     name: 'hnz-hebrew-slugs-dev',
     apply: 'serve',
-    configureServer: rewrite,
-    configurePreviewServer: rewrite,
+    configureServer: rewrite(false),
+    configurePreviewServer: rewrite(true),
   };
 }
 
